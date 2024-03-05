@@ -126,7 +126,6 @@ function showSequentialImages() {
 function showMetadata() {
   if (images.length > 0 && imagesData) {
     let imgData = images[currentIndex];
-    let imgState = images[currentIndex].state;
     let imgObj = images[currentIndex].img;
     image(imgObj, 0, 0, width, height);
     fill(0, 0, 0, 80);
@@ -160,18 +159,6 @@ function showMetadata() {
       // Cambia lo stato dopo che le proprietà sono state mostrate per un certo tempo
       current_state = state_bounding;
       timestamp = 0; // Resetta il timestamp per il prossimo ciclo
-    }
-    // Controlla se l'immagine corrente è safe o not safe
-    if (imgState === "safe" && !imgStateFlag) {
-      console.log("Safe");
-      currentImageIndex_state = 0;
-      updateSupabase(true);
-      imgStateFlag = true; // Set the flag to true after showing console log
-    } else if (imgState === "not_safe" && !imgStateFlag) {
-      console.log("Not Safe");
-      currentImageIndex_state = 1;
-      updateSupabase(false);
-      imgStateFlag = true; // Set the flag to true after showing console log
     }
   }
 }
@@ -248,6 +235,7 @@ function drawDetection(det, detectionType) {
 
 function showDialog() {
   let imgObj = images[currentIndex].img;
+  let imgState = images[currentIndex].state;
   image(imgObj, 0, 0, width, height);
   let imgCaption = images[currentIndex].caption;
 
@@ -269,6 +257,19 @@ function showDialog() {
   let buttonY = 640; // Ad esempio, posiziona i bottoni un po' sotto al testo
   image(buttonSafe, 100, buttonY); // Posiziona il primo bottone
   image(buttonNotSafe, width - 350, buttonY); // Posiziona il secondo bottone
+
+  // Controlla se l'immagine corrente è safe o not safe
+  if (imgState === "safe" && !imgStateFlag) {
+    console.log("Safe");
+    currentImageIndex_state = 0;
+    updateSupabase(true);
+    imgStateFlag = true; // Set the flag to true after showing console log
+  } else if (imgState === "not_safe" && !imgStateFlag) {
+    console.log("Not Safe");
+    currentImageIndex_state = 1;
+    updateSupabase(false);
+    imgStateFlag = true; // Set the flag to true after showing console log
+  }
 }
 
 // Supplemental Functions
