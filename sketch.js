@@ -263,12 +263,12 @@ function showDialog() {
     console.log("Safe");
     currentImageIndex_state = 0;
     updateSupabase(true);
-    imgStateFlag = true; // Set the flag to true after showing console log
+    // imgStateFlag = true; // Set the flag to true after showing console log
   } else if (imgState === "not_safe" && !imgStateFlag) {
     console.log("Not Safe");
     currentImageIndex_state = 1;
     updateSupabase(false);
-    imgStateFlag = true; // Set the flag to true after showing console log
+    // imgStateFlag = true; // Set the flag to true after showing console log
   }
 }
 
