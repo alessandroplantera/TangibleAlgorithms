@@ -48,7 +48,7 @@
             "megapixels": 1.1664,
             "creation_date": "Non disponibile"
         },
-        "state": "safe"
+        "state": "not_safe"
     },
     {
         "file_name": "IMG_1.jpg",
@@ -64,7 +64,7 @@
             "megapixels": 1.15776,
             "creation_date": "Non disponibile"
         },
-        "state": "safe"
+        "state": "not_safe"
     },
     {
         "file_name": "IMG_2.jpg",
@@ -227,7 +227,7 @@
             "megapixels": 1.16208,
             "creation_date": "Non disponibile"
         },
-        "state": "safe"
+        "state": "not_safe"
     },
     {
         "file_name": "IMG_5.jpg",
