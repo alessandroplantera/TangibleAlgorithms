@@ -1,0 +1,3015 @@
+[
+    {
+        "file_name": "IMG_1.jpg",
+        "caption": "A person is lying face-down on a bed with rumpled sheets, suggesting a\nquiet, private moment, perhaps relaxation, rest, or exhaustion.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    2,
+                    286,
+                    638,
+                    571
+                ],
+                "confidence": 0.8622633218765259,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    0,
+                    329,
+                    134,
+                    460
+                ],
+                "confidence": 0.46687018871307373,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    0,
+                    289,
+                    638,
+                    630
+                ],
+                "confidence": 0.38067328929901123,
+                "class_id": 59.0,
+                "class_name": "bed"
+            }
+        ],
+        "roboflow_detections": []
+    },
+    {
+        "file_name": "IMG_2.jpg",
+        "caption": "A person is sitting, wearing a dark t-shirt and athletic shorts with a\nred detail, possibly on a sofa or cushioned bench with a floral\npattern. The person's posture is relaxed, and the setting appears to\nbe an indoor, informal environment, suggesting a moment of leisure or\nrest.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    0,
+                    6,
+                    638,
+                    638
+                ],
+                "confidence": 0.890546977519989,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    1,
+                    512,
+                    523,
+                    639
+                ],
+                "confidence": 0.31043434143066406,
+                "class_id": 59.0,
+                "class_name": "bed"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    254.5,
+                    265.0,
+                    321.5,
+                    387.0
+                ],
+                "confidence": 0.0745651125907898,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_3.jpg",
+        "caption": "An artwork featuring two people, one lying down and the other\nstanding, in a room with patterned wallpaper. The scene suggests an\nintimate, private moment.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    664,
+                    271,
+                    1079,
+                    1067
+                ],
+                "confidence": 0.9444906711578369,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    6,
+                    537,
+                    1071,
+                    1072
+                ],
+                "confidence": 0.26848435401916504,
+                "class_id": 59.0,
+                "class_name": "bed"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    768,
+                    786,
+                    843,
+                    988
+                ],
+                "confidence": 0.12318411469459534,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    447,
+                    699,
+                    710,
+                    1014
+                ],
+                "confidence": 0.06551200151443481,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    911,
+                    988,
+                    1221,
+                    1160
+                ],
+                "confidence": 0.05665752291679382,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_4.jpg",
+        "caption": "A seafood display with a variety of items, including squid, and a\nprice sign, overlayed with a transparent effect that includes a human\nfigure. It may be taken at a market.",
+        "yolo_detections": [],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    506,
+                    736,
+                    806,
+                    1139
+                ],
+                "confidence": 0.06154853105545044,
+                "class_id": 4,
+                "class_name": "Cumshot"
+            },
+            {
+                "bbox": [
+                    540,
+                    541,
+                    1620,
+                    1602
+                ],
+                "confidence": 0.05852070450782776,
+                "class_id": 11,
+                "class_name": "Shower"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_5.jpg",
+        "caption": "A person is wearing a stylized mask with cat-like features, likely in\na themed setting or costume party. They are also holding a frozen\ntreat close to their mouth. Accessories such as a necklace add to\ntheir ensemble.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    5,
+                    6,
+                    717,
+                    1277
+                ],
+                "confidence": 0.758962869644165,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    375,
+                    629,
+                    994,
+                    1823
+                ],
+                "confidence": 0.3638532757759094,
+                "class_id": 5,
+                "class_name": "Facial"
+            },
+            {
+                "bbox": [
+                    507,
+                    1017,
+                    928,
+                    1543
+                ],
+                "confidence": 0.1490006446838379,
+                "class_id": 3,
+                "class_name": "Chains"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_6.jpg",
+        "caption": "A person in casual attire sits on a chair in a homey setting,\ninteracting with a medical device. The atmosphere is intimate and\npersonal, with everyday objects around.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    247,
+                    0,
+                    1049,
+                    1300
+                ],
+                "confidence": 0.9532426595687866,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    144,
+                    342,
+                    186,
+                    414
+                ],
+                "confidence": 0.6611311435699463,
+                "class_id": 41.0,
+                "class_name": "cup"
+            },
+            {
+                "bbox": [
+                    0,
+                    146,
+                    1033,
+                    1209
+                ],
+                "confidence": 0.515730082988739,
+                "class_id": 59.0,
+                "class_name": "bed"
+            },
+            {
+                "bbox": [
+                    825,
+                    422,
+                    983,
+                    693
+                ],
+                "confidence": 0.49536746740341187,
+                "class_id": 26.0,
+                "class_name": "handbag"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    669,
+                    651,
+                    1489,
+                    1953
+                ],
+                "confidence": 0.09640830755233765,
+                "class_id": 11,
+                "class_name": "Shower"
+            },
+            {
+                "bbox": [
+                    536,
+                    376,
+                    640,
+                    518
+                ],
+                "confidence": 0.09314566850662231,
+                "class_id": 4,
+                "class_name": "Cumshot"
+            },
+            {
+                "bbox": [
+                    1006,
+                    1249,
+                    1068,
+                    1354
+                ],
+                "confidence": 0.0781882107257843,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    901,
+                    585,
+                    1074,
+                    829
+                ],
+                "confidence": 0.05421510338783264,
+                "class_id": 10,
+                "class_name": "Pussy"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_7.jpg",
+        "caption": "Illustration depicting various characters in an abstract style at a\ncommunal bathing facility, with a contrast between those showering and\nothers in a steamy area, engaging in different interactions and\nexpressions. The setting suggests a public bathhouse or sauna\nenvironment.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    850,
+                    606,
+                    1079,
+                    1070
+                ],
+                "confidence": 0.323883980512619,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    815,
+                    198,
+                    965,
+                    366
+                ],
+                "confidence": 0.12981894612312317,
+                "class_id": 3,
+                "class_name": "Chains"
+            },
+            {
+                "bbox": [
+                    643,
+                    793,
+                    907,
+                    1354
+                ],
+                "confidence": 0.11036238074302673,
+                "class_id": 5,
+                "class_name": "Facial"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_8.jpg",
+        "caption": "A person is hidden behind a colorful, artistic representation of a\ncharacter that appears to resemble a creature or figure from a wild\nwest setting. They are seated with a vibrant blue and orange backdrop\nthat suggests a playful and imaginative atmosphere.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    124,
+                    3,
+                    1041,
+                    1023
+                ],
+                "confidence": 0.901728093624115,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    337,
+                    230,
+                    1004,
+                    609
+                ],
+                "confidence": 0.3969916105270386,
+                "class_id": 30.0,
+                "class_name": "skis"
+            },
+            {
+                "bbox": [
+                    7,
+                    3,
+                    1058,
+                    1021
+                ],
+                "confidence": 0.2962311804294586,
+                "class_id": 59.0,
+                "class_name": "bed"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    756,
+                    424,
+                    1218,
+                    802
+                ],
+                "confidence": 0.6839500069618225,
+                "class_id": 3,
+                "class_name": "Chains"
+            },
+            {
+                "bbox": [
+                    594,
+                    733,
+                    1316,
+                    1184
+                ],
+                "confidence": 0.3919724225997925,
+                "class_id": 3,
+                "class_name": "Chains"
+            },
+            {
+                "bbox": [
+                    472,
+                    879,
+                    553,
+                    1039
+                ],
+                "confidence": 0.196975439786911,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_9.jpg",
+        "caption": "A person is holding flowers in front of them, possibly inside a room\nwith soft lighting filtered through curtains, creating an artistic and\nintimate atmosphere.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    92,
+                    614,
+                    1080,
+                    1242
+                ],
+                "confidence": 0.379379540681839,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    18,
+                    1,
+                    1080,
+                    1240
+                ],
+                "confidence": 0.2957601547241211,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    0,
+                    0,
+                    1055,
+                    1241
+                ],
+                "confidence": 0.27756428718566895,
+                "class_id": 58.0,
+                "class_name": "potted plant"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    296,
+                    660,
+                    888,
+                    1826
+                ],
+                "confidence": 0.09652397036552429,
+                "class_id": 4,
+                "class_name": "Cumshot"
+            },
+            {
+                "bbox": [
+                    858,
+                    966,
+                    898,
+                    1253
+                ],
+                "confidence": 0.06163126230239868,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    997,
+                    1158,
+                    1162,
+                    1329
+                ],
+                "confidence": 0.05823764204978943,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    242,
+                    832,
+                    385,
+                    935
+                ],
+                "confidence": 0.05299302935600281,
+                "class_id": 0,
+                "class_name": "BlackLingerie"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_10.jpg",
+        "caption": "A joyful individual is standing on a sunny beach, with the sea and a\nmountain in the background. Other beachgoers are visible, including a\nperson kayaking. The setting suggests a leisurely day at the beach.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    347,
+                    567,
+                    650,
+                    1349
+                ],
+                "confidence": 0.9428408741950989,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    174,
+                    1137,
+                    261,
+                    1350
+                ],
+                "confidence": 0.8877719044685364,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    20,
+                    1159,
+                    51,
+                    1189
+                ],
+                "confidence": 0.720254123210907,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    829,
+                    987,
+                    865,
+                    1020
+                ],
+                "confidence": 0.5772533416748047,
+                "class_id": 8.0,
+                "class_name": "boat"
+            },
+            {
+                "bbox": [
+                    899,
+                    1078,
+                    1027,
+                    1143
+                ],
+                "confidence": 0.414936363697052,
+                "class_id": 8.0,
+                "class_name": "boat"
+            },
+            {
+                "bbox": [
+                    936,
+                    1076,
+                    974,
+                    1126
+                ],
+                "confidence": 0.37915751338005066,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    903,
+                    1109,
+                    1027,
+                    1144
+                ],
+                "confidence": 0.32307708263397217,
+                "class_id": 8.0,
+                "class_name": "boat"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    108,
+                    832,
+                    324,
+                    1859
+                ],
+                "confidence": 0.073222815990448,
+                "class_id": 9,
+                "class_name": "Outdoors"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_11.jpg",
+        "caption": "A thickly painted figure is seated, suggesting a quiet moment of\nrepose, with a subdued palette that focuses attention on form and\nlight. The setting appears intimate, likely indoors.",
+        "yolo_detections": [],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    403,
+                    775,
+                    635,
+                    1148
+                ],
+                "confidence": 0.14443373680114746,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    432,
+                    353,
+                    524,
+                    543
+                ],
+                "confidence": 0.07510516047477722,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    136,
+                    753,
+                    409,
+                    1281
+                ],
+                "confidence": 0.0645328164100647,
+                "class_id": 9,
+                "class_name": "Outdoors"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_12.jpg",
+        "caption": "A person with curly hair wearing a feathered outfit is interacting\nclosely with another whose head is obscured by a red mask with devil-\nlike features. They appear to be within a room with classical\narchitecture elements. The mood seems intimate and theatrically\nartistic.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    1,
+                    332,
+                    590,
+                    1347
+                ],
+                "confidence": 0.6272682547569275,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    66,
+                    0,
+                    1065,
+                    1345
+                ],
+                "confidence": 0.6055617332458496,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    304,
+                    213,
+                    1077,
+                    1347
+                ],
+                "confidence": 0.3214965760707855,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    541,
+                    768,
+                    1583,
+                    1930
+                ],
+                "confidence": 0.062176913022994995,
+                "class_id": 6,
+                "class_name": "Flashing Tits"
+            },
+            {
+                "bbox": [
+                    723,
+                    1036,
+                    1435,
+                    1662
+                ],
+                "confidence": 0.060212671756744385,
+                "class_id": 5,
+                "class_name": "Facial"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_13.jpg",
+        "caption": "A person is positioned over a green upholstered chair, gazing towards\nthe camera. They appear to be in a casual indoor setting, possibly a\nroom at home.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    2,
+                    0,
+                    955,
+                    1346
+                ],
+                "confidence": 0.9576186537742615,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    80,
+                    568,
+                    850,
+                    1347
+                ],
+                "confidence": 0.6969355940818787,
+                "class_id": 56.0,
+                "class_name": "chair"
+            },
+            {
+                "bbox": [
+                    171,
+                    0,
+                    338,
+                    161
+                ],
+                "confidence": 0.29483649134635925,
+                "class_id": 16.0,
+                "class_name": "dog"
+            },
+            {
+                "bbox": [
+                    41,
+                    28,
+                    861,
+                    1347
+                ],
+                "confidence": 0.2654436230659485,
+                "class_id": 56.0,
+                "class_name": "chair"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    772,
+                    435,
+                    881,
+                    725
+                ],
+                "confidence": 0.10501259565353394,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_14.jpg",
+        "caption": "A collection of photos with an artistic take on a subject's body\npositioned differently across various scenes, likely representing\nintimate moments or relaxed environments indoors. Most details are\nindistinguishable due to privacy edits.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    758,
+                    0,
+                    1031,
+                    252
+                ],
+                "confidence": 0.8929623365402222,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    70,
+                    306,
+                    343,
+                    889
+                ],
+                "confidence": 0.8376473784446716,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    260,
+                    991,
+                    770,
+                    1350
+                ],
+                "confidence": 0.8369269371032715,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    499,
+                    297,
+                    1079,
+                    875
+                ],
+                "confidence": 0.6465843915939331,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    1,
+                    198,
+                    484,
+                    985
+                ],
+                "confidence": 0.6437398791313171,
+                "class_id": 59.0,
+                "class_name": "bed"
+            },
+            {
+                "bbox": [
+                    94,
+                    0,
+                    533,
+                    177
+                ],
+                "confidence": 0.5855481028556824,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    47,
+                    984,
+                    1014,
+                    1349
+                ],
+                "confidence": 0.5173501372337341,
+                "class_id": 59.0,
+                "class_name": "bed"
+            },
+            {
+                "bbox": [
+                    1,
+                    1005,
+                    304,
+                    1344
+                ],
+                "confidence": 0.49275916814804077,
+                "class_id": 63.0,
+                "class_name": "laptop"
+            },
+            {
+                "bbox": [
+                    855,
+                    295,
+                    1079,
+                    802
+                ],
+                "confidence": 0.43513625860214233,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    500,
+                    141,
+                    589,
+                    328
+                ],
+                "confidence": 0.3454214334487915,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    780,
+                    565,
+                    1379,
+                    1695
+                ],
+                "confidence": 0.34667664766311646,
+                "class_id": 0,
+                "class_name": "BlackLingerie"
+            },
+            {
+                "bbox": [
+                    463,
+                    1173,
+                    1389,
+                    1525
+                ],
+                "confidence": 0.15640029311180115,
+                "class_id": 6,
+                "class_name": "Flashing Tits"
+            },
+            {
+                "bbox": [
+                    541,
+                    234,
+                    635,
+                    432
+                ],
+                "confidence": 0.11755508184432983,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_15.jpg",
+        "caption": "An abstract close-up of skin with natural curves and contours,\npossibly from a human body. The setting is indistinct based on the\nclose framing.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    1,
+                    5,
+                    1075,
+                    662
+                ],
+                "confidence": 0.9149917960166931,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": []
+    },
+    {
+        "file_name": "IMG_16.jpg",
+        "caption": "A colored pencil drawing captures a seated figure with dynamic shading\nand an accentuated sense of light, suggesting an artistic or studio\nsetting.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    0,
+                    0,
+                    1078,
+                    1073
+                ],
+                "confidence": 0.7782102227210999,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": []
+    },
+    {
+        "file_name": "IMG_17.jpg",
+        "caption": "An individual with dramatic makeup and a fur coat is lounging on a\nchair, against a backdrop of lush curtains, possibly in a club or\nbackstage area.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    2,
+                    78,
+                    824,
+                    1304
+                ],
+                "confidence": 0.9224231243133545,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    509,
+                    292,
+                    1077,
+                    1304
+                ],
+                "confidence": 0.499674528837204,
+                "class_id": 77.0,
+                "class_name": "teddy bear"
+            },
+            {
+                "bbox": [
+                    296,
+                    160,
+                    959,
+                    367
+                ],
+                "confidence": 0.4113353192806244,
+                "class_id": 56.0,
+                "class_name": "chair"
+            }
+        ],
+        "roboflow_detections": []
+    },
+    {
+        "file_name": "IMG_18.jpg",
+        "caption": "A person in a wheelchair is holding a sign with a protest message\nabout social media censorship. They are outdoors, likely in a park or\ngarden.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    366,
+                    333,
+                    750,
+                    1015
+                ],
+                "confidence": 0.8982782959938049,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    475,
+                    1009,
+                    552,
+                    1078
+                ],
+                "confidence": 0.4364902079105377,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    664,
+                    833,
+                    701,
+                    930
+                ],
+                "confidence": 0.3928835690021515,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    777,
+                    359,
+                    1382,
+                    1077
+                ],
+                "confidence": 0.11238986253738403,
+                "class_id": 9,
+                "class_name": "Outdoors"
+            },
+            {
+                "bbox": [
+                    151,
+                    653,
+                    454,
+                    1409
+                ],
+                "confidence": 0.057590872049331665,
+                "class_id": 9,
+                "class_name": "Outdoors"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_19.jpg",
+        "caption": "A person in a swimsuit stands on a rock against a sky with sparkling\neffects, possibly near a beach or pool. The image might convey a sense\nof carefree summer vibes.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    147,
+                    174,
+                    780,
+                    1351
+                ],
+                "confidence": 0.9519338011741638,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    312,
+                    1074,
+                    1076,
+                    1350
+                ],
+                "confidence": 0.6057370901107788,
+                "class_id": 37.0,
+                "class_name": "surfboard"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    721,
+                    868,
+                    759,
+                    916
+                ],
+                "confidence": 0.13621684908866882,
+                "class_id": 4,
+                "class_name": "Cumshot"
+            },
+            {
+                "bbox": [
+                    463,
+                    733,
+                    1153,
+                    1946
+                ],
+                "confidence": 0.0634726881980896,
+                "class_id": 11,
+                "class_name": "Shower"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_20.jpg",
+        "caption": "A collage featuring a person with illustrations and text overlaid,\ncreating an artistic, possibly urban, vibe. This seems like it could\nbe part of a street art project or a personal artistic expression.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    221,
+                    539,
+                    1039,
+                    1344
+                ],
+                "confidence": 0.8208615779876709,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    23,
+                    0,
+                    1077,
+                    1342
+                ],
+                "confidence": 0.6846069097518921,
+                "class_id": 59.0,
+                "class_name": "bed"
+            },
+            {
+                "bbox": [
+                    832,
+                    0,
+                    1030,
+                    126
+                ],
+                "confidence": 0.5810339450836182,
+                "class_id": 73.0,
+                "class_name": "book"
+            }
+        ],
+        "roboflow_detections": []
+    },
+    {
+        "file_name": "IMG_21.jpg",
+        "caption": "A person with a beard is leaning against another person's torso, who\nis lifting their arm. They may be in a moment of relaxation or\nintimacy, outdoors with sunlight illuminating them, possibly in a\ncasual, private setting.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    472,
+                    252,
+                    1076,
+                    1337
+                ],
+                "confidence": 0.9125431776046753,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    6,
+                    1,
+                    794,
+                    1336
+                ],
+                "confidence": 0.8825024962425232,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    685,
+                    1282,
+                    774,
+                    1394
+                ],
+                "confidence": 0.2232421636581421,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    989,
+                    510,
+                    1169,
+                    987
+                ],
+                "confidence": 0.10487088561058044,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    826,
+                    1153,
+                    1328,
+                    1514
+                ],
+                "confidence": 0.06655183434486389,
+                "class_id": 14,
+                "class_name": "Tits"
+            },
+            {
+                "bbox": [
+                    536,
+                    803,
+                    1585,
+                    1213
+                ],
+                "confidence": 0.05152049660682678,
+                "class_id": 14,
+                "class_name": "Tits"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_22.jpg",
+        "caption": "A person stands in a cozy room with indoor plants, a green velvet\nchair with a resting dog, wall art, and a decorative mirror. They are\nlikely at home, surrounded by personal items.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    316,
+                    179,
+                    743,
+                    1255
+                ],
+                "confidence": 0.9623072147369385,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    705,
+                    812,
+                    973,
+                    934
+                ],
+                "confidence": 0.9178467392921448,
+                "class_id": 16.0,
+                "class_name": "dog"
+            },
+            {
+                "bbox": [
+                    58,
+                    495,
+                    227,
+                    728
+                ],
+                "confidence": 0.9038296937942505,
+                "class_id": 58.0,
+                "class_name": "potted plant"
+            },
+            {
+                "bbox": [
+                    679,
+                    583,
+                    1079,
+                    1183
+                ],
+                "confidence": 0.4439254105091095,
+                "class_id": 56.0,
+                "class_name": "chair"
+            },
+            {
+                "bbox": [
+                    680,
+                    583,
+                    1079,
+                    1183
+                ],
+                "confidence": 0.3878483772277832,
+                "class_id": 57.0,
+                "class_name": "couch"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    685,
+                    1167,
+                    749,
+                    1337
+                ],
+                "confidence": 0.5830190181732178,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    127,
+                    542,
+                    270,
+                    642
+                ],
+                "confidence": 0.209374338388443,
+                "class_id": 2,
+                "class_name": "Bush"
+            },
+            {
+                "bbox": [
+                    146,
+                    609,
+                    324,
+                    852
+                ],
+                "confidence": 0.15724274516105652,
+                "class_id": 7,
+                "class_name": "Hairy Pussy"
+            },
+            {
+                "bbox": [
+                    530,
+                    730,
+                    973,
+                    1808
+                ],
+                "confidence": 0.11210700869560242,
+                "class_id": 0,
+                "class_name": "BlackLingerie"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_23.jpg",
+        "caption": "Two abstract, colorful figures appear to be interacting with each\nother in a whimsical or surreal illustration. The style is loose and\nexpressive, perhaps suggesting a non-literal or dream-like scene.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    13,
+                    35,
+                    1065,
+                    828
+                ],
+                "confidence": 0.4272800385951996,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    480,
+                    617,
+                    684,
+                    897
+                ],
+                "confidence": 0.12245103716850281,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    204,
+                    464,
+                    612,
+                    1247
+                ],
+                "confidence": 0.08594104647636414,
+                "class_id": 4,
+                "class_name": "Cumshot"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_24.jpg",
+        "caption": "A person's shadow is cast over pavement where an animal is lying. The\nscene suggests an urban setting with bright sunlight.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    488,
+                    24,
+                    1068,
+                    1082
+                ],
+                "confidence": 0.9596350789070129,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    240,
+                    422,
+                    596,
+                    1017
+                ],
+                "confidence": 0.821940004825592,
+                "class_id": 16.0,
+                "class_name": "dog"
+            }
+        ],
+        "roboflow_detections": []
+    },
+    {
+        "file_name": "IMG_25.jpg",
+        "caption": "A stack of pink-colored magazines with a \"Sensitive Content\" warning\non the cover is visible inside a cardboard box, suggesting they're\nready for distribution or sale.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    238,
+                    432,
+                    555,
+                    804
+                ],
+                "confidence": 0.859257161617279,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    11,
+                    274,
+                    914,
+                    1244
+                ],
+                "confidence": 0.7978691458702087,
+                "class_id": 73.0,
+                "class_name": "book"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    440,
+                    653,
+                    504,
+                    765
+                ],
+                "confidence": 0.6548731327056885,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    766,
+                    468,
+                    1393,
+                    1315
+                ],
+                "confidence": 0.06683751940727234,
+                "class_id": 0,
+                "class_name": "BlackLingerie"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_26.jpg",
+        "caption": "A person is crouching in a playful pose, wearing patterned shorts and\na hat, mimicking a cat in a domestic bathroom setting, possibly for a\nhumorous effect.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    240,
+                    243,
+                    1065,
+                    1128
+                ],
+                "confidence": 0.9539494514465332,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    760,
+                    0,
+                    1076,
+                    914
+                ],
+                "confidence": 0.293704092502594,
+                "class_id": 72.0,
+                "class_name": "refrigerator"
+            },
+            {
+                "bbox": [
+                    0,
+                    873,
+                    357,
+                    1317
+                ],
+                "confidence": 0.25785431265830994,
+                "class_id": 61.0,
+                "class_name": "toilet"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    668,
+                    606,
+                    765,
+                    862
+                ],
+                "confidence": 0.44835999608039856,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    667,
+                    632,
+                    749,
+                    829
+                ],
+                "confidence": 0.057720839977264404,
+                "class_id": 4,
+                "class_name": "Cumshot"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_27.jpg",
+        "caption": "A colorful illustration features a person lying on their back with\nlegs raised and feet donning sneakers. They appear relaxed against a\nvibrant yellow background.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    4,
+                    103,
+                    1078,
+                    1278
+                ],
+                "confidence": 0.7650662660598755,
+                "class_id": 77.0,
+                "class_name": "teddy bear"
+            },
+            {
+                "bbox": [
+                    903,
+                    221,
+                    986,
+                    366
+                ],
+                "confidence": 0.44341328740119934,
+                "class_id": 65.0,
+                "class_name": "remote"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    536,
+                    741,
+                    752,
+                    1045
+                ],
+                "confidence": 0.3054029941558838,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_28.jpg",
+        "caption": "A red silhouette of a figure with horns and a muscular build poses\nconfidently, possibly representing a devilish character. The\nbackground is plain, suggesting it's an artistic print or graphic\ndesign.",
+        "yolo_detections": [],
+        "roboflow_detections": []
+    },
+    {
+        "file_name": "IMG_29.jpg",
+        "caption": "Two individuals pose intimately, one standing and one seated in a\nwheelchair, likely symbolizing personal connection or advocating\ninclusivity. The environment appears urban and gritty.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    210,
+                    0,
+                    1015,
+                    1350
+                ],
+                "confidence": 0.9043346047401428,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    58,
+                    297,
+                    575,
+                    1345
+                ],
+                "confidence": 0.3725760877132416,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    947,
+                    1298,
+                    1208,
+                    1401
+                ],
+                "confidence": 0.05808067321777344,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_30.jpg",
+        "caption": "A person standing under a disproportionately large pair of legs,\nlikely an artistic or humorous perspective play, possibly set outdoors\nnear infrastructure like a bridge or overpass.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    105,
+                    2,
+                    957,
+                    1033
+                ],
+                "confidence": 0.9583620429039001,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    512,
+                    414,
+                    662,
+                    978
+                ],
+                "confidence": 0.8869650959968567,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": []
+    },
+    {
+        "file_name": "IMG_33.jpg",
+        "caption": "A close-up of a book's back cover with an ISBN barcode and a\ndescription discussing artwork and photos by LGBTQIA+ creators,\naddressing issues of censorship on social media platforms and the\nnuances of community guidelines.",
+        "yolo_detections": [],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    567,
+                    629,
+                    1587,
+                    1475
+                ],
+                "confidence": 0.05123618245124817,
+                "class_id": 0,
+                "class_name": "BlackLingerie"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_32.jpg",
+        "caption": "A close-up of a page discussing the history of censorship related to\nsexuality, particularly homosexuality, in arts and government, citing\nspecific cultural references and artworks. The setting appears to be\nan educational or study environment, and it's likely from a book or\nacademic paper.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    0,
+                    1,
+                    1077,
+                    1063
+                ],
+                "confidence": 0.6381109356880188,
+                "class_id": 73.0,
+                "class_name": "book"
+            }
+        ],
+        "roboflow_detections": []
+    },
+    {
+        "file_name": "IMG_31.jpg",
+        "caption": "A gloved hand holds a magazine with a cover warning about sensitive\ncontent. In the background, various straps and metal items hang,\nsuggesting the setting might be a boutique with alternative fashion\nitems or accessories.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    190,
+                    68,
+                    958,
+                    932
+                ],
+                "confidence": 0.9237325191497803,
+                "class_id": 73.0,
+                "class_name": "book"
+            },
+            {
+                "bbox": [
+                    0,
+                    443,
+                    445,
+                    1062
+                ],
+                "confidence": 0.8883519768714905,
+                "class_id": 39.0,
+                "class_name": "bottle"
+            },
+            {
+                "bbox": [
+                    413,
+                    203,
+                    669,
+                    549
+                ],
+                "confidence": 0.5494751334190369,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    829,
+                    93,
+                    1079,
+                    1060
+                ],
+                "confidence": 0.31374579668045044,
+                "class_id": 26.0,
+                "class_name": "handbag"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    745,
+                    176,
+                    851,
+                    370
+                ],
+                "confidence": 0.23211970925331116,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    970,
+                    414,
+                    1189,
+                    1079
+                ],
+                "confidence": 0.09131923317909241,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    214,
+                    472,
+                    311,
+                    676
+                ],
+                "confidence": 0.08843302726745605,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    304,
+                    1007,
+                    430,
+                    1137
+                ],
+                "confidence": 0.05473640561103821,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    540,
+                    376,
+                    803,
+                    739
+                ],
+                "confidence": 0.05114579200744629,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_34.jpg",
+        "caption": "Two hands in black gloves interact with a can of Crisco vegetable\nshortening, one hand appearing to press into the soft contents of the\ncan. The setting seems undefined, focusing entirely on the actions and\nthe product.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    238,
+                    76,
+                    887,
+                    983
+                ],
+                "confidence": 0.8178092241287231,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    280,
+                    411,
+                    577,
+                    801
+                ],
+                "confidence": 0.52122962474823,
+                "class_id": 41.0,
+                "class_name": "cup"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    801,
+                    378,
+                    973,
+                    975
+                ],
+                "confidence": 0.6253215670585632,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_35.jpg",
+        "caption": "A television screen displaying a person lying down with a focus on the\nlower part of the body. There's a guitar amplifier to the left and\nvarious items underneath the TV stand. The setting appears to be a\ncasual home environment.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    352,
+                    154,
+                    1014,
+                    469
+                ],
+                "confidence": 0.9053054451942444,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    329,
+                    89,
+                    1062,
+                    515
+                ],
+                "confidence": 0.8712009191513062,
+                "class_id": 62.0,
+                "class_name": "tv"
+            },
+            {
+                "bbox": [
+                    1021,
+                    0,
+                    1079,
+                    53
+                ],
+                "confidence": 0.36460667848587036,
+                "class_id": 58.0,
+                "class_name": "potted plant"
+            },
+            {
+                "bbox": [
+                    708,
+                    667,
+                    990,
+                    919
+                ],
+                "confidence": 0.3492956757545471,
+                "class_id": 73.0,
+                "class_name": "book"
+            },
+            {
+                "bbox": [
+                    812,
+                    739,
+                    988,
+                    918
+                ],
+                "confidence": 0.3418833911418915,
+                "class_id": 73.0,
+                "class_name": "book"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    1047,
+                    26,
+                    1112,
+                    79
+                ],
+                "confidence": 0.0776585042476654,
+                "class_id": 2,
+                "class_name": "Bush"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_36.jpg",
+        "caption": "A person with long hair wearing a pink corset and a pearl necklace\nstands against a cloudy sky backdrop. They have a visible tattoo on\ntheir arm.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    205,
+                    37,
+                    991,
+                    1335
+                ],
+                "confidence": 0.9686097502708435,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    906,
+                    1163,
+                    1024,
+                    1491
+                ],
+                "confidence": 0.7444393634796143,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_37.jpg",
+        "caption": "A stained glass artwork features an angelic figure with widespread\nwings, set against a bright background and encased in a unique\noutline. A singular red rose adds a touch of color at the bottom left.\nThe setting suggests a place of reflection or heritage.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    1,
+                    0,
+                    1080,
+                    1114
+                ],
+                "confidence": 0.6474234461784363,
+                "class_id": 75.0,
+                "class_name": "vase"
+            }
+        ],
+        "roboflow_detections": []
+    },
+    {
+        "file_name": "IMG_38.jpg",
+        "caption": "A pair of red leather gloves with elongated fingers are intertwined.\nThe setting looks like a simple, plain backdrop, possibly for an\nartistic or fashion display.",
+        "yolo_detections": [],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    610,
+                    578,
+                    1279,
+                    1607
+                ],
+                "confidence": 0.05669206380844116,
+                "class_id": 6,
+                "class_name": "Flashing Tits"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_39.jpg",
+        "caption": "A photomontage with two figures superimposed on a space shuttle\nlaunch, accompanied by starry embellishments and cloud-like forms. The\nsetting suggests a blend of classic artistry and modern technology.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    294,
+                    634,
+                    622,
+                    1143
+                ],
+                "confidence": 0.7868485450744629,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    276,
+                    522,
+                    948,
+                    1143
+                ],
+                "confidence": 0.36116382479667664,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    880,
+                    997,
+                    1031,
+                    1290
+                ],
+                "confidence": 0.07088825106620789,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    259,
+                    235,
+                    775,
+                    705
+                ],
+                "confidence": 0.05839461088180542,
+                "class_id": 9,
+                "class_name": "Outdoors"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_40.jpg",
+        "caption": "A person wearing a spiky headpiece and suggestive attire poses in a\nsetting with a filtered, artistic effect creating reflections. The\nmood suggests a fashion or artistic photoshoot with a bold, expressive\ntheme.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    622,
+                    1,
+                    1009,
+                    1305
+                ],
+                "confidence": 0.7206130027770996,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    2,
+                    3,
+                    977,
+                    1329
+                ],
+                "confidence": 0.4272750914096832,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    348,
+                    170,
+                    726,
+                    1036
+                ],
+                "confidence": 0.3407288193702698,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    873,
+                    270,
+                    1137,
+                    811
+                ],
+                "confidence": 0.2788159251213074,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    266,
+                    324,
+                    640,
+                    742
+                ],
+                "confidence": 0.06570166349411011,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_41.jpg",
+        "caption": "A vibrant, expressive painting captures a seated person, evoking a\ncasual, contemplative atmosphere. The use of vivid colors suggests an\nartistic or emotional nuance to the scene.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    282,
+                    59,
+                    796,
+                    1030
+                ],
+                "confidence": 0.7419735789299011,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    570,
+                    885,
+                    1089,
+                    1206
+                ],
+                "confidence": 0.1191457211971283,
+                "class_id": 5,
+                "class_name": "Facial"
+            },
+            {
+                "bbox": [
+                    545,
+                    565,
+                    1095,
+                    1590
+                ],
+                "confidence": 0.08259275555610657,
+                "class_id": 5,
+                "class_name": "Facial"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_42.jpg",
+        "caption": "A parking lot with a sign reading \"Dreamers Open 24/7\" and the outline\nof a sunlit individual stands layered at the forefront, creatively\nmerged with the scene through a photographic effect.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    517,
+                    101,
+                    1040,
+                    1021
+                ],
+                "confidence": 0.8872933387756348,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    175,
+                    758,
+                    453,
+                    854
+                ],
+                "confidence": 0.86188805103302,
+                "class_id": 7.0,
+                "class_name": "truck"
+            },
+            {
+                "bbox": [
+                    385,
+                    786,
+                    691,
+                    937
+                ],
+                "confidence": 0.6105046272277832,
+                "class_id": 2.0,
+                "class_name": "car"
+            },
+            {
+                "bbox": [
+                    135,
+                    793,
+                    178,
+                    835
+                ],
+                "confidence": 0.2631719708442688,
+                "class_id": 2.0,
+                "class_name": "car"
+            }
+        ],
+        "roboflow_detections": []
+    },
+    {
+        "file_name": "IMG_43.jpg",
+        "caption": "A person with a beard is taking a selfie, standing in front of a\nreflective, distorted surface creating a multicolored visual effect\naround the edges. The individual is partly dressed and looks focused\non capturing the photo. The setting appears to be indoors.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    1,
+                    0,
+                    1030,
+                    1337
+                ],
+                "confidence": 0.960254967212677,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    572,
+                    129,
+                    785,
+                    565
+                ],
+                "confidence": 0.8894547820091248,
+                "class_id": 67.0,
+                "class_name": "cell phone"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    627,
+                    974,
+                    1339,
+                    1292
+                ],
+                "confidence": 0.06628420948982239,
+                "class_id": 14,
+                "class_name": "Tits"
+            },
+            {
+                "bbox": [
+                    545,
+                    675,
+                    1603,
+                    1988
+                ],
+                "confidence": 0.059385329484939575,
+                "class_id": 6,
+                "class_name": "Flashing Tits"
+            },
+            {
+                "bbox": [
+                    415,
+                    669,
+                    1231,
+                    2008
+                ],
+                "confidence": 0.05179920792579651,
+                "class_id": 11,
+                "class_name": "Shower"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_44.jpg",
+        "caption": "A person with an expressive face is pictured against a radial striped\nbackdrop, likely depicting strong emotion. The setting appears to be a\npage from a book or a publication.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    167,
+                    212,
+                    1079,
+                    1082
+                ],
+                "confidence": 0.911522626876831,
+                "class_id": 73.0,
+                "class_name": "book"
+            },
+            {
+                "bbox": [
+                    354,
+                    508,
+                    623,
+                    823
+                ],
+                "confidence": 0.8190646767616272,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    352,
+                    450,
+                    621,
+                    774
+                ],
+                "confidence": 0.4207827150821686,
+                "class_id": 25.0,
+                "class_name": "umbrella"
+            }
+        ],
+        "roboflow_detections": []
+    },
+    {
+        "file_name": "IMG_45.jpg",
+        "caption": "A close-up of a shiny outfit with reflective details, featuring a\nlarge belt buckle and a tattoo. The setting suggests a setting with\ndim lighting and a focus on the attire's textures and reflective\nquality.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    1,
+                    845,
+                    383,
+                    1314
+                ],
+                "confidence": 0.5974814891815186,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    9,
+                    5,
+                    1067,
+                    1323
+                ],
+                "confidence": 0.31587135791778564,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    477,
+                    256,
+                    598,
+                    560
+                ],
+                "confidence": 0.06745976209640503,
+                "class_id": 4,
+                "class_name": "Cumshot"
+            },
+            {
+                "bbox": [
+                    230,
+                    714,
+                    336,
+                    861
+                ],
+                "confidence": 0.06196710467338562,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_46.jpg",
+        "caption": "A vibrant illustration depicts a person surrounded by floral patterns,\ncreating an intimate and relaxed scene.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    371,
+                    13,
+                    802,
+                    519
+                ],
+                "confidence": 0.3147928714752197,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    875,
+                    1263,
+                    969,
+                    1435
+                ],
+                "confidence": 0.08799362182617188,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    555,
+                    754,
+                    1604,
+                    1945
+                ],
+                "confidence": 0.060395896434783936,
+                "class_id": 6,
+                "class_name": "Flashing Tits"
+            },
+            {
+                "bbox": [
+                    543,
+                    172,
+                    1437,
+                    517
+                ],
+                "confidence": 0.0557158887386322,
+                "class_id": 14,
+                "class_name": "Tits"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_47.jpg",
+        "caption": "A close-up view of a person's chest with surgical scars below each\nbreast, likely following a bilateral medical procedure. A necklace\nwith a pendant is visible above the scars.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    101,
+                    868,
+                    513,
+                    959
+                ],
+                "confidence": 0.29205936193466187,
+                "class_id": 79.0,
+                "class_name": "toothbrush"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    533,
+                    179,
+                    934,
+                    538
+                ],
+                "confidence": 0.31708163022994995,
+                "class_id": 3,
+                "class_name": "Chains"
+            },
+            {
+                "bbox": [
+                    201,
+                    658,
+                    604,
+                    1050
+                ],
+                "confidence": 0.09007793664932251,
+                "class_id": 14,
+                "class_name": "Tits"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_48.jpg",
+        "caption": "A painting captures a reclining man, with a contemplative expression,\npossibly in a bedroom, as natural light filters through a window\nbeside him. An overlaid text strip partially obscures the view while\naddressing content guidelines.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    0,
+                    237,
+                    394,
+                    1219
+                ],
+                "confidence": 0.7665844559669495,
+                "class_id": 73.0,
+                "class_name": "book"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    675,
+                    593,
+                    1017,
+                    987
+                ],
+                "confidence": 0.12900033593177795,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    918,
+                    727,
+                    1240,
+                    1186
+                ],
+                "confidence": 0.08720380067825317,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    989,
+                    329,
+                    1169,
+                    794
+                ],
+                "confidence": 0.07733410596847534,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_49.jpg",
+        "caption": "A shirtless man is squatting in a well-lit area, and it appears to be\na sunny day. His facial expression suggests he's in thought or\nconversation. He's likely outside due to the lighting and shadow\npatterns.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    1,
+                    110,
+                    1078,
+                    1297
+                ],
+                "confidence": 0.9136224389076233,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    710,
+                    1226,
+                    993,
+                    1376
+                ],
+                "confidence": 0.17636162042617798,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    687,
+                    894,
+                    1444,
+                    1514
+                ],
+                "confidence": 0.1627505123615265,
+                "class_id": 14,
+                "class_name": "Tits"
+            },
+            {
+                "bbox": [
+                    650,
+                    684,
+                    1508,
+                    1813
+                ],
+                "confidence": 0.1298196017742157,
+                "class_id": 6,
+                "class_name": "Flashing Tits"
+            },
+            {
+                "bbox": [
+                    644,
+                    1223,
+                    1049,
+                    1379
+                ],
+                "confidence": 0.05634993314743042,
+                "class_id": 8,
+                "class_name": "Lingerie"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_50.jpg",
+        "caption": "This is a placeholder graphic commonly used to mask content considered\nsensitive, indicating the original content may not be suitable for all\naudiences. The context is not discernible from this image alone.",
+        "yolo_detections": [],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    295.0,
+                    74.5,
+                    325.0,
+                    111.5
+                ],
+                "confidence": 0.22322267293930054,
+                "class_id": 0,
+                "class_name": "BlackLingerie"
+            },
+            {
+                "bbox": [
+                    295.0,
+                    270.5,
+                    325.0,
+                    309.5
+                ],
+                "confidence": 0.15238335728645325,
+                "class_id": 0,
+                "class_name": "BlackLingerie"
+            },
+            {
+                "bbox": [
+                    295.0,
+                    256.0,
+                    325.0,
+                    296.0
+                ],
+                "confidence": 0.12729856371879578,
+                "class_id": 8,
+                "class_name": "Lingerie"
+            },
+            {
+                "bbox": [
+                    295.0,
+                    107.5,
+                    325.0,
+                    142.5
+                ],
+                "confidence": 0.11049637198448181,
+                "class_id": 0,
+                "class_name": "BlackLingerie"
+            },
+            {
+                "bbox": [
+                    295.0,
+                    65.0,
+                    329.0,
+                    107.0
+                ],
+                "confidence": 0.08206865191459656,
+                "class_id": 8,
+                "class_name": "Lingerie"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_51.jpg",
+        "caption": "Three identical magazines are displayed with a cover featuring a\nperson and a warning about sensitive content. It seems to be an art or\ncultural publication potentially challenging norms and perceptions.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    755,
+                    359,
+                    885,
+                    613
+                ],
+                "confidence": 0.6294450759887695,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    457,
+                    444,
+                    650,
+                    695
+                ],
+                "confidence": 0.5854398608207703,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    211,
+                    419,
+                    348,
+                    687
+                ],
+                "confidence": 0.5198889970779419,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    56,
+                    355,
+                    494,
+                    987
+                ],
+                "confidence": 0.48951712250709534,
+                "class_id": 73.0,
+                "class_name": "book"
+            },
+            {
+                "bbox": [
+                    343,
+                    410,
+                    765,
+                    991
+                ],
+                "confidence": 0.27599307894706726,
+                "class_id": 73.0,
+                "class_name": "book"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    555,
+                    570,
+                    754,
+                    825
+                ],
+                "confidence": 0.08257502317428589,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    560,
+                    832,
+                    593,
+                    859
+                ],
+                "confidence": 0.08070194721221924,
+                "class_id": 4,
+                "class_name": "Cumshot"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_52.jpg",
+        "caption": "A person with extensive body art is relaxing in a chair, surrounded by\ncolorful wall decor and art prints. The setting suggests a creative\nspace, possibly an artist's studio or a personal workspace\ncharacterized by urban style and visual expression.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    252,
+                    384,
+                    943,
+                    1328
+                ],
+                "confidence": 0.9528643488883972,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    776,
+                    666,
+                    1056,
+                    1244
+                ],
+                "confidence": 0.8171615600585938,
+                "class_id": 56.0,
+                "class_name": "chair"
+            },
+            {
+                "bbox": [
+                    23,
+                    873,
+                    133,
+                    1031
+                ],
+                "confidence": 0.7989356517791748,
+                "class_id": 41.0,
+                "class_name": "cup"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    300,
+                    905,
+                    644,
+                    1044
+                ],
+                "confidence": 0.06358510255813599,
+                "class_id": 0,
+                "class_name": "BlackLingerie"
+            },
+            {
+                "bbox": [
+                    459,
+                    1128,
+                    639,
+                    1265
+                ],
+                "confidence": 0.052316367626190186,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_55.jpg",
+        "caption": "A tattooed person lounges on a bed, one leg raised, revealing a\nsneaker. In a casual room setting, a framed painting hangs in the\nbackground.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    0,
+                    240,
+                    1079,
+                    1349
+                ],
+                "confidence": 0.9371582269668579,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    1,
+                    590,
+                    1077,
+                    1348
+                ],
+                "confidence": 0.622963011264801,
+                "class_id": 59.0,
+                "class_name": "bed"
+            },
+            {
+                "bbox": [
+                    1,
+                    868,
+                    1078,
+                    1349
+                ],
+                "confidence": 0.3510917127132416,
+                "class_id": 59.0,
+                "class_name": "bed"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    743,
+                    493,
+                    906,
+                    978
+                ],
+                "confidence": 0.3002835214138031,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_53.jpg",
+        "caption": "A person with tattoos is reclining on a bed in a room with traditional\ndecor. There's an abstract painting on the wall. The setting suggests\na hotel room.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    85,
+                    578,
+                    922,
+                    1326
+                ],
+                "confidence": 0.9332392811775208,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    7,
+                    783,
+                    1075,
+                    1344
+                ],
+                "confidence": 0.47138434648513794,
+                "class_id": 59.0,
+                "class_name": "bed"
+            },
+            {
+                "bbox": [
+                    337,
+                    733,
+                    388,
+                    786
+                ],
+                "confidence": 0.3971421718597412,
+                "class_id": 74.0,
+                "class_name": "clock"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    812,
+                    1230,
+                    1029,
+                    1430
+                ],
+                "confidence": 0.3609519898891449,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_54.jpg",
+        "caption": "A pair of black underwear with a label that reads \"SENSITIVE CONTENT\"\non a plain background, likely indicative of a humorous or conceptual\ndesign.",
+        "yolo_detections": [],
+        "roboflow_detections": []
+    },
+    {
+        "file_name": "IMG_56.jpg",
+        "caption": "A person is kneeling on a bed in a room, facing away from the camera,\nwearing a shirt with a provocative statement and shoes.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    2,
+                    655,
+                    1077,
+                    1343
+                ],
+                "confidence": 0.9565132856369019,
+                "class_id": 59.0,
+                "class_name": "bed"
+            },
+            {
+                "bbox": [
+                    98,
+                    268,
+                    999,
+                    1239
+                ],
+                "confidence": 0.9450536370277405,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": []
+    },
+    {
+        "file_name": "IMG_57.jpg",
+        "caption": "A black t-shirt with white text is presented against a neutral\nbackground, likely intended for humorous or provocative impact.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    43,
+                    180,
+                    1044,
+                    1221
+                ],
+                "confidence": 0.4576467275619507,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": []
+    },
+    {
+        "file_name": "IMG_58.jpg",
+        "caption": "A person is seated on a bed in a room with patterned curtains and\nbedding, posing for the camera in a casual manner.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    306,
+                    332,
+                    836,
+                    1305
+                ],
+                "confidence": 0.954046905040741,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    3,
+                    746,
+                    1077,
+                    1343
+                ],
+                "confidence": 0.7323682308197021,
+                "class_id": 59.0,
+                "class_name": "bed"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    226,
+                    868,
+                    242,
+                    946
+                ],
+                "confidence": 0.05112546682357788,
+                "class_id": 10,
+                "class_name": "Pussy"
+            }
+        ]
+    },
+    {
+        "file_name": "IMG_59.jpg",
+        "caption": "A bare-chested individual with tattoos is stretching upward, held on\nthe shoulders by another person facing away, wearing a black T-shirt\nwith white text. They appear to be in a hotel room.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    473,
+                    910,
+                    719,
+                    1278
+                ],
+                "confidence": 0.9409922361373901,
+                "class_id": 59.0,
+                "class_name": "bed"
+            },
+            {
+                "bbox": [
+                    188,
+                    142,
+                    576,
+                    828
+                ],
+                "confidence": 0.9266459345817566,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    32,
+                    790,
+                    282,
+                    1163
+                ],
+                "confidence": 0.9228702187538147,
+                "class_id": 56.0,
+                "class_name": "chair"
+            },
+            {
+                "bbox": [
+                    239,
+                    434,
+                    478,
+                    1176
+                ],
+                "confidence": 0.9219392538070679,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    456,
+                    1136,
+                    507,
+                    1220
+                ],
+                "confidence": 0.2741541564464569,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            },
+            {
+                "bbox": [
+                    505,
+                    1137,
+                    607,
+                    1223
+                ],
+                "confidence": 0.07468199729919434,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ]
+    }
+]
