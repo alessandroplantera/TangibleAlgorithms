@@ -488,8 +488,8 @@ function mousePressed() {
     }
     // Controlla se il click è avvenuto sul bottone "not safe"
     else if (
-      mouseX >= width - 350 &&
-      mouseX <= width - 350 + buttonNotSafe.width &&
+      mouseX >= width - 300 &&
+      mouseX <= width - 300 + buttonNotSafe.width &&
       mouseY >= buttonY &&
       mouseY <= buttonY + buttonNotSafe.height
     ) {
@@ -507,6 +507,7 @@ function mousePressed() {
       mouseY >= height / 2 - buttonStart.height / 2 &&
       mouseY <= height / 2 + buttonStart.height / 2
     ) {
+      updateSupabase("current_state", state_metadata_show);
       console.log("Safe button clicked");
       console.log(currentImageIndex_state);
       current_state = state_metadata_show;
