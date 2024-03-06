@@ -3,32 +3,38 @@ const button_start = document.createElement("button");
 let imagesData; // Questo conterrà i dati JSON
 let images = []; // Array per memorizzare le immagini pre-caricate e i dati associati
 
-//bbox
+// BBOX
 // Variabili per il controllo del flusso dei bounding box e dei tipi di detection
 let detectionTypes = ["yolo_detections", "roboflow_detections"];
 let currentDetectionIndex = 0; // Indice per alternare tra YOLO e Roboflow
 let currentBboxIndex = -1;
 let detectionQueue = []; // Coda per tenere traccia di tutti i bounding box da disegnare
 
+// TIME FLAG PER I BOUNDING BOX
 let allDetections = []; // Array per memorizzare tutti i bounding box e i loro tipi
 let lastBboxDrawTime = 0;
 const bboxDrawInterval = 250;
 let postDrawDelayStarted = false;
-let postDrawDelayTime = 2000;
+let postDrawDelayTime = 5000;
 let detectionsDrawn = false; // Indica se tutti i bounding box sono stati disegnati
 
-//SafeOrNot
+// SAFE OR NOT
 let buttonSafe, buttonNotSafe;
 let imgStateFlag = false; // Flag to track if console log has been shown
 
-//STATI
+// FEEDBACK
+let feedBackSafe, feedBackNotsafe;
+let startTime = -1; // Imposta a -1 per indicare che il timer non è attivo
+
+// STATI
 let state_idle = 0;
 let state_metadata_show = 1;
 let state_bounding = 2;
 //stateboundingdone(?)
 let state_dialog = 3;
+let state_feedback = 4;
 
-//MAIN STATE VARIABLES
+// MAIN STATE VARIABLES
 let current_state = state_idle;
 let currentImageIndex_state = -1;
 let currentIndex = 0; // Indice per tenere traccia dell'immagine corrente da visualizzare
@@ -37,7 +43,7 @@ let currentIndex = 0; // Indice per tenere traccia dell'immagine corrente da vis
 let showText = false; // Variabile globale per controllare la visualizzazione del testo
 let timestamp = 0; // Memorizza il momento in cui l'immagine viene mostrata
 let state_change_delay = 2000; // Ritardo prima di cambiare stato (2 secondi)
-let properties_display_duration = 5000; // Durata per cui le proprietà rimangono visualizzate prima di cambiare stato
+let properties_display_duration = 10000; // Durata per cui le proprietà rimangono visualizzate prima di cambiare stato
 
 function preload() {
   loadJSON("label.json", function (loadedJson) {
@@ -67,29 +73,42 @@ function preload() {
   });
   buttonSafe = loadImage("assets/safe.png");
   buttonNotSafe = loadImage("assets/not_safe.png");
+  feedBackSafe = loadImage("assets/feedbackSafe.png");
+  feedBackNotsafe = loadImage("assets/feedbackNotsafe.png");
+  buttonStart = loadImage("assets/button_start.png");
+  font = loadFont("assets/IBMPlexMono-Light.ttf");
+  fontMedium = loadFont("assets/IBMPlexMono-Medium.ttf");
 }
 
 function setup() {
   createCanvas(834, 1194);
   colorMode(RGB, 255);
   //frameRate(1); // Regola secondo necessità
+  updateSupabase("safe_or_not", currentImageIndex_state);
 
-  if (current_state == state_idle) {
-    let button_start = createButton("Start");
-    button_start.position(
-      width / 2 - button_start.width,
-      height - button_start.height * 2
-    );
-    button_start.mousePressed(() => {
-      current_state = state_metadata_show;
-    });
-  }
+  // if (current_state == state_idle) {
+  //   let button_start = createButton("Start");
+  //   button_start.position(
+  //     width / 2 - button_start.width,
+  //     height - button_start.height * 2
+  //   );
+  //   button_start.mousePressed(() => {
+  //     current_state = state_metadata_show;
+  //   });
+  // }
 }
+let prev_current_index = -1; // Imposta un valore iniziale che sicuramente non sarà mai un indice valido
+let prev_current_state = null; // Imposta un valore iniziale che sicuramente non corrisponderà ad alcuno stato
 
 function draw() {
   background(220);
   if (current_state == state_idle) {
     showSequentialImages();
+    image(
+      buttonStart,
+      width / 2 - buttonStart.width / 2,
+      height / 2 - buttonStart.height / 2
+    );
   }
   if (current_state == state_metadata_show) {
     showMetadata();
@@ -100,6 +119,20 @@ function draw() {
   }
   if (current_state == state_dialog) {
     showDialog();
+  }
+  if (current_state == state_feedback) {
+    showFeedback();
+  }
+  // Controlla se `current_index` o `current_state` sono cambiati
+  if (
+    currentIndex != prev_current_index ||
+    current_state != prev_current_state
+  ) {
+    updateSupabase("image_index", currentIndex);
+    updateSupabase("current_state", current_state);
+    // Aggiorna le variabili di controllo con i valori attuali
+    prev_current_index = currentIndex;
+    prev_current_state = current_state;
   }
 }
 
@@ -133,33 +166,103 @@ function showMetadata() {
     noFill();
     let currentTime = millis();
     if (timestamp === 0) {
-      // Se è la prima volta, imposta il timestamp
-      timestamp = currentTime;
+      timestamp = currentTime; // Imposta il timestamp se è la prima volta
     }
 
-    // Controlla se sono trascorsi 2 secondi per mostrare le proprietà
+    let typingSpeed = 5; // Velocità di "digitazione" in millisecondi per lettera
+
     if (
       currentTime - timestamp > state_change_delay &&
       currentTime - timestamp < properties_display_duration
     ) {
       let yPos = 40; // Posizione di inizio per il testo sul canvas
+      textFont(font);
       fill(255); // Colore del testo
       noStroke();
-      textSize(22);
-      text(`Nome immagine: ${imgData.file_name}`, 10, yPos);
-      yPos += 30;
-      text(`Proprietà immagine:`, 10, yPos);
-      yPos += 30;
 
-      Object.keys(imgData.image_properties).forEach((key) => {
-        text(`${key}: ${imgData.image_properties[key]}`, 20, yPos);
-        yPos += 30;
-      });
+      // Calcola il numero di lettere da mostrare in base al tempo trascorso
+      let elapsed = currentTime - timestamp - state_change_delay;
+      let lettersToShow = Math.floor(elapsed / typingSpeed);
+
+      // Funzione per ottenere il testo "animato"
+      function animatedText(fullText, x, y, maxLetters) {
+        text(fullText.substring(0, maxLetters), x, y);
+      }
+
+      // Nome immagine
+      let imgNameText = `Nome immagine: ${imgData.file_name}`;
+      textSize(22);
+      if (lettersToShow > imgNameText.length) {
+        lettersToShow -= imgNameText.length;
+      } else {
+        imgNameText = imgNameText.substring(0, lettersToShow);
+        lettersToShow = 0;
+      }
+      text(imgNameText, 10, yPos);
+      yPos += 21;
+
+      if (lettersToShow > 0) {
+        let propertiesText = "Proprietà immagine:";
+        textSize(18);
+        if (lettersToShow > propertiesText.length) {
+          lettersToShow -= propertiesText.length;
+        } else {
+          propertiesText = propertiesText.substring(0, lettersToShow);
+          lettersToShow = 0;
+        }
+        text(propertiesText, 10, yPos + 80);
+        yPos += 21;
+
+        Object.keys(imgData.image_properties).forEach((key) => {
+          textSize(18);
+          if (lettersToShow > 0) {
+            let propText = `${key}: ${imgData.image_properties[key]}`;
+            if (lettersToShow > propText.length) {
+              lettersToShow -= propText.length;
+            } else {
+              propText = propText.substring(0, lettersToShow);
+              lettersToShow = 0;
+            }
+            text(propText, 50, yPos + 80);
+            yPos += 21;
+          }
+        });
+      }
     } else if (currentTime - timestamp > properties_display_duration) {
-      // Cambia lo stato dopo che le proprietà sono state mostrate per un certo tempo
       current_state = state_bounding;
       timestamp = 0; // Resetta il timestamp per il prossimo ciclo
     }
+  }
+}
+
+function showMetadataOnlyText() {
+  let imgData = images[currentIndex];
+  let currentTime = millis();
+  if (timestamp === 0) {
+    // Se è la prima volta, imposta il timestamp
+    timestamp = currentTime;
+  }
+  // Controlla se sono trascorsi 2 secondi per mostrare le proprietà
+  if (
+    currentTime - timestamp > state_change_delay &&
+    currentTime - timestamp < properties_display_duration
+  ) {
+    let yPos = 40; // Posizione di inizio per il testo sul canvas
+    fill(255); // Colore del testo
+    noStroke();
+    textSize(22);
+    text(`Nome immagine: ${imgData.file_name}`, 10, yPos);
+    yPos += 30;
+    text(`Proprietà immagine:`, 10, yPos);
+    yPos += 30;
+    Object.keys(imgData.image_properties).forEach((key) => {
+      text(`${key}: ${imgData.image_properties[key]}`, 20, yPos);
+      yPos += 30;
+    });
+  } else if (currentTime - timestamp > properties_display_duration) {
+    // Cambia lo stato dopo che le proprietà sono state mostrate per un certo tempo
+    current_state = state_bounding;
+    timestamp = 0; // Resetta il timestamp per il prossimo ciclo
   }
 }
 
@@ -175,6 +278,22 @@ function showBoundingBoxes() {
   let currentTime = millis();
   let imgObj = images[currentIndex].img;
   image(imgObj, 0, 0, width, height);
+
+  let imgState = images[currentIndex].state;
+
+  // Controlla se l'immagine corrente è safe o not safe
+  if (imgState === "safe" && !imgStateFlag) {
+    console.log("Safe");
+    currentImageIndex_state = 0;
+    updateSupabase("safe_or_not", currentImageIndex_state);
+    // imgStateFlag = true; // Set the flag to true after showing console log
+  } else if (imgState === "not_safe" && !imgStateFlag) {
+    console.log("Not Safe");
+    currentImageIndex_state = 1;
+    updateSupabase("safe_or_not", currentImageIndex_state);
+    // imgStateFlag = true; // Set the flag to true after showing console log
+  }
+
   fill(0, 0, 0, 80);
   rect(0, 0, width, height);
   noFill();
@@ -223,40 +342,73 @@ function drawDetection(det, detectionType) {
   let bbox = det.bbox;
   let className = det.class_name;
   let confidence = det.confidence;
-  stroke(detectionType === "yolo_detections" ? [0, 255, 0] : [0, 0, 255]);
+
+  stroke(detectionType === "yolo_detections" ? [180, 255, 0] : [254, 1, 86]);
   strokeWeight(4);
-  fill(detectionType === "yolo_detections" ? [0, 255, 0, 60] : [0, 0, 255, 60]); // Opzionale: semi-trasparente
+  fill(
+    detectionType === "yolo_detections" ? [180, 255, 0, 30] : [254, 1, 86, 30]
+  );
+
   rect(bbox[0], bbox[1], bbox[2] - bbox[0], bbox[3] - bbox[1]);
-  fill(255); // Colore bianco per il testo
-  noStroke();
+  textFont(fontMedium);
   textSize(16);
-  text(`${className}: ${confidence.toFixed(2)}`, bbox[0], bbox[1] - 10);
+  let textStr = `${className}: ${confidence.toFixed(2)}`;
+  let textWidthVal = textWidth(textStr);
+
+  fill(detectionType === "yolo_detections" ? [180, 255, 0] : [254, 1, 86]);
+  noStroke();
+  rect(bbox[0] - 2, bbox[1] - 22, textWidthVal + 4, 24);
+
+  fill(0); // Colore del testo a nero
+  // Sostituisci il calcolo di textY con un valore fisso appropriato
+  let textY = bbox[1] - 22; // Regola questo valore per centrare il testo nel tuo rettangolo
+  let textX = textStr + 4;
+  // console.log("ciao");
+  text(textX, bbox[0] - 2, textY);
 }
 
 function showDialog() {
   let imgObj = images[currentIndex].img;
   let imgState = images[currentIndex].state;
-  image(imgObj, 0, 0, width, height);
   let imgCaption = images[currentIndex].caption;
+  image(imgObj, 0, 0, width, height);
+
+  // Utilizza showDialogTimestampInitialized per inizializzare solo una volta
+  if (!showDialogTimestampInitialized) {
+    timestamp = millis(); // Solo la prima volta
+    showDialogTimestampInitialized = true;
+  }
+
+  let typingSpeed = 10; // Velocità di digitazione in millisecondi per lettera
 
   fill(0, 0, 0, 120);
   rect(0, 0, width, height);
-  noFill();
+  fill(255);
   // Add caption Title
+  textFont(font);
   fill(255); // White color
   noStroke();
-  textSize(20);
-  textAlign(CENTER, CENTER);
-  text("caption", 130, 468);
-  textAlign(LEFT, CENTER);
-  textSize(30);
-  textLeading(30);
-  let captionWidth = width - 200; // Larghezza della didascalia (canvas width - 100px da entrambi i lati)
-  text(imgCaption, 100, 560, captionWidth);
-  // Posiziona i bottoni in base alla larghezza del canvas e desiderata distanza dal testo
-  let buttonY = 640; // Ad esempio, posiziona i bottoni un po' sotto al testo
-  image(buttonSafe, 100, buttonY); // Posiziona il primo bottone
-  image(buttonNotSafe, width - 350, buttonY); // Posiziona il secondo bottone
+  textSize(18);
+  textAlign(LEFT, TOP);
+  text("Caption", 10, 120);
+  noStroke();
+  textSize(18);
+  textAlign(LEFT, TOP);
+  textLeading(21);
+  let captionWidth = width - 250;
+
+  let currentTime = millis();
+  let elapsed = currentTime - timestamp;
+  let lettersToShow = Math.floor(elapsed / typingSpeed);
+  let textToShow = imgCaption.substring(0, lettersToShow);
+  text(textToShow, 50, 141, captionWidth); // Mostra il testo animato
+
+  // Mostra i bottoni solo dopo che il testo è stato completamente visualizzato
+  if (lettersToShow >= imgCaption.length) {
+    let buttonY = 640;
+    image(buttonSafe, 100, buttonY); // Posiziona il primo bottone
+    image(buttonNotSafe, width - 300, buttonY); // Posiziona il secondo bottone
+  }
 
   // Controlla se l'immagine corrente è safe o not safe
   if (imgState === "safe" && !imgStateFlag) {
@@ -269,6 +421,52 @@ function showDialog() {
     currentImageIndex_state = 1;
     updateSupabase(false);
     // imgStateFlag = true; // Set the flag to true after showing console log
+  }
+}
+function showFeedback() {
+  // Controlla se il timer non è stato ancora impostato
+  if (startTime < 0) {
+    startTime = millis(); // Imposta il timer
+  }
+  let duration = 2000; // 2 seconds
+  let currentTime = millis();
+
+  if (currentImageIndex_state == 0) {
+    let imgObj = images[currentIndex].img;
+    image(imgObj, 0, 0, width, height);
+    fill(0, 0, 0, 80);
+    rect(0, 0, width, height);
+    noFill();
+    image(
+      feedBackSafe,
+      width / 2 - feedBackSafe.width / 2,
+      height / 2 - feedBackSafe.height / 2
+    );
+    if (millis() - startTime >= duration) {
+      current_state = state_metadata_show;
+      currentIndex = Math.floor(Math.random() * images.length);
+    }
+  } else {
+    let imgObj = images[currentIndex].img;
+    image(imgObj, 0, 0, width, height);
+    fill(0, 0, 0, 80);
+    rect(0, 0, width, height);
+    noFill();
+    image(
+      feedBackNotsafe,
+      width / 2 - feedBackSafe.width / 2,
+      height / 2 - feedBackSafe.height / 2
+    );
+    if (millis() - startTime >= duration) {
+      current_state = state_metadata_show;
+      currentIndex = Math.floor(Math.random() * images.length);
+    }
+  }
+  // Controlla se sono passati 2 secondi
+  if (currentTime - startTime >= duration) {
+    current_state = state_metadata_show;
+    currentIndex = Math.floor(Math.random() * images.length);
+    startTime = -1; // Resetta startTime per permettere al timer di essere riavviato in futuro
   }
 }
 
@@ -285,8 +483,8 @@ function mousePressed() {
     ) {
       console.log("Safe button clicked");
       console.log(currentImageIndex_state);
-      current_state = state_metadata_show;
-      currentIndex = Math.floor(Math.random() * images.length);
+      current_state = state_feedback;
+      // currentIndex = Math.floor(Math.random() * images.length);
     }
     // Controlla se il click è avvenuto sul bottone "not safe"
     else if (
@@ -295,13 +493,30 @@ function mousePressed() {
       mouseY >= buttonY &&
       mouseY <= buttonY + buttonNotSafe.height
     ) {
-      current_state = state_metadata_show;
-      currentIndex = Math.floor(Math.random() * images.length);
+      current_state = state_feedback;
       console.log(currentImageIndex_state);
       console.log("Not Safe button clicked");
+      // currentIndex = Math.floor(Math.random() * images.length);
+    }
+  }
+
+  if (current_state == state_idle) {
+    if (
+      mouseX >= width / 2 - buttonStart.width / 2 &&
+      mouseX <= width / 2 + buttonStart.width / 2 &&
+      mouseY >= height / 2 - buttonStart.height / 2 &&
+      mouseY <= height / 2 + buttonStart.height / 2
+    ) {
+      console.log("Safe button clicked");
+      console.log(currentImageIndex_state);
+      current_state = state_metadata_show;
+      currentIndex = Math.floor(Math.random() * images.length);
+      showDialogTimestampInitialized = false;
+      timestamp = 0;
     }
   }
 }
+
 // Full screen management
 function keyPressed() {
   if (key === "f" || key === "F") {
