@@ -83,23 +83,11 @@ function preload() {
 function setup() {
   createCanvas(834, 1194);
   colorMode(RGB, 255);
+  updateSupabase("start", 0);
   //frameRate(1); // Regola secondo necessità
-  updateSupabase("safe_or_not", currentImageIndex_state);
-
-  // if (current_state == state_idle) {
-  //   let button_start = createButton("Start");
-  //   button_start.position(
-  //     width / 2 - button_start.width,
-  //     height - button_start.height * 2
-  //   );
-  //   button_start.mousePressed(() => {
-  //     current_state = state_metadata_show;
-  //   });
-  // }
 }
-let prev_current_index = -1; // Imposta un valore iniziale che sicuramente non sarà mai un indice valido
-let prev_current_state = null; // Imposta un valore iniziale che sicuramente non corrisponderà ad alcuno stato
 
+let lastProcessedIndex = -1; // Inizializza con un valore che non corrisponderà mai a un indice valido
 function draw() {
   background(220);
   if (current_state == state_idle) {
@@ -123,17 +111,29 @@ function draw() {
   if (current_state == state_feedback) {
     showFeedback();
   }
-  // Controlla se `current_index` o `current_state` sono cambiati
-  if (
-    currentIndex != prev_current_index ||
-    current_state != prev_current_state
-  ) {
-    updateSupabase("image_index", currentIndex);
-    updateSupabase("current_state", current_state);
-    // Aggiorna le variabili di controllo con i valori attuali
-    prev_current_index = currentIndex;
-    prev_current_state = current_state;
+
+  let imgState = images[currentIndex].state;
+  // Controlla se l'indice dell'immagine è cambiato
+  if (!current_state == state_idle) {
+    if (currentIndex !== lastProcessedIndex) {
+      // Il blocco di codice qui verrà eseguito solo quando l'indice dell'immagine cambia
+      if (imgState === "safe") {
+        console.log("L'immagine è safe.");
+        currentImageIndex_state = 0;
+      } else if (imgState === "not_safe") {
+        console.log("L'immagine è not safe.");
+        currentImageIndex_state = 1;
+      }
+      updateSupabase("safe_or_not", currentImageIndex_state);
+      console.log("percorso " + currentImageIndex_state + " iniziato");
+      // Aggiorna la flag e l'ultimo indice processato
+      imgStateFlag = true;
+      lastProcessedIndex = currentIndex;
+    }
   }
+
+  //updateSupabase("image_index", currentIndex);
+  //updateSupabase("safe_or_not", currentImageIndex_state);
 }
 
 // Main Functions
@@ -278,22 +278,6 @@ function showBoundingBoxes() {
   let currentTime = millis();
   let imgObj = images[currentIndex].img;
   image(imgObj, 0, 0, width, height);
-
-  let imgState = images[currentIndex].state;
-
-  // Controlla se l'immagine corrente è safe o not safe
-  if (imgState === "safe" && !imgStateFlag) {
-    console.log("Safe");
-    currentImageIndex_state = 0;
-    updateSupabase("safe_or_not", currentImageIndex_state);
-    // imgStateFlag = true; // Set the flag to true after showing console log
-  } else if (imgState === "not_safe" && !imgStateFlag) {
-    console.log("Not Safe");
-    currentImageIndex_state = 1;
-    updateSupabase("safe_or_not", currentImageIndex_state);
-    // imgStateFlag = true; // Set the flag to true after showing console log
-  }
-
   fill(0, 0, 0, 80);
   rect(0, 0, width, height);
   noFill();
@@ -368,19 +352,16 @@ function drawDetection(det, detectionType) {
 }
 
 function showDialog() {
+  updateSupabase("current_state", 3);
   let imgObj = images[currentIndex].img;
-  let imgState = images[currentIndex].state;
   let imgCaption = images[currentIndex].caption;
   image(imgObj, 0, 0, width, height);
-
   // Utilizza showDialogTimestampInitialized per inizializzare solo una volta
   if (!showDialogTimestampInitialized) {
     timestamp = millis(); // Solo la prima volta
     showDialogTimestampInitialized = true;
   }
-
   let typingSpeed = 10; // Velocità di digitazione in millisecondi per lettera
-
   fill(0, 0, 0, 120);
   rect(0, 0, width, height);
   fill(255);
@@ -408,19 +389,6 @@ function showDialog() {
     let buttonY = 640;
     image(buttonSafe, 100, buttonY); // Posiziona il primo bottone
     image(buttonNotSafe, width - 300, buttonY); // Posiziona il secondo bottone
-  }
-
-  // Controlla se l'immagine corrente è safe o not safe
-  if (imgState === "safe" && !imgStateFlag) {
-    console.log("Safe");
-    currentImageIndex_state = 0;
-    updateSupabase(true);
-    // imgStateFlag = true; // Set the flag to true after showing console log
-  } else if (imgState === "not_safe" && !imgStateFlag) {
-    console.log("Not Safe");
-    currentImageIndex_state = 1;
-    updateSupabase(false);
-    // imgStateFlag = true; // Set the flag to true after showing console log
   }
 }
 function showFeedback() {
@@ -507,7 +475,7 @@ function mousePressed() {
       mouseY >= height / 2 - buttonStart.height / 2 &&
       mouseY <= height / 2 + buttonStart.height / 2
     ) {
-      updateSupabase("current_state", state_metadata_show);
+      updateSupabase("start", 1);
       console.log("Safe button clicked");
       console.log(currentImageIndex_state);
       current_state = state_metadata_show;
