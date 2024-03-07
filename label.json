@@ -53,8 +53,43 @@
     {
         "file_name": "IMG_1.jpg",
         "caption": "A seafood display at a market, possibly with a double exposure effect creating an overlay of a person's face among the items, giving an eerie artistic composition. A price tag is visible, suggesting a commercial setting.",
-        "yolo_detections": [],
-        "roboflow_detections": [],
+        "yolo_detections": [
+            {
+                "bbox": [
+                    664,
+                    271,
+                    1079,
+                    1067
+                ],
+                "confidence": 0.9444904327392578,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    6,
+                    537,
+                    1071,
+                    1072
+                ],
+                "confidence": 0.26848462224006653,
+                "class_id": 59.0,
+                "class_name": "bed"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    768,
+                    786,
+                    843,
+                    988
+                ],
+                "confidence": 0.12318296730518341,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ],
         "image_properties": {
             "file_size_kb": 206.5244140625,
             "codec": "JPEG",
