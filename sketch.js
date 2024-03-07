@@ -90,6 +90,25 @@ function setup() {
 let lastProcessedIndex = -1; // Inizializza con un valore che non corrisponderà mai a un indice valido
 function draw() {
   background(220);
+  let imgState = images[currentIndex].state;
+  // Controlla se l'indice dell'immagine è cambiato
+  if (!current_state == state_idle) {
+    if (currentIndex !== lastProcessedIndex) {
+      // Il blocco di codice qui verrà eseguito solo quando l'indice dell'immagine cambia
+      if (imgState === "safe") {
+        console.log("L'immagine è safe.");
+        currentImageIndex_state = 0;
+      } else if (imgState === "not_safe") {
+        console.log("L'immagine è not safe.");
+        currentImageIndex_state = 1;
+      }
+      updateSupabase("safe_or_not", currentImageIndex_state);
+      console.log("percorso " + currentImageIndex_state + " iniziato");
+      // Aggiorna la flag e l'ultimo indice processato
+      imgStateFlag = true;
+      lastProcessedIndex = currentIndex;
+    }
+  }
   if (current_state == state_idle) {
     showSequentialImages();
     image(
@@ -110,26 +129,6 @@ function draw() {
   }
   if (current_state == state_feedback) {
     showFeedback();
-  }
-
-  let imgState = images[currentIndex].state;
-  // Controlla se l'indice dell'immagine è cambiato
-  if (!current_state == state_idle) {
-    if (currentIndex !== lastProcessedIndex) {
-      // Il blocco di codice qui verrà eseguito solo quando l'indice dell'immagine cambia
-      if (imgState === "safe") {
-        console.log("L'immagine è safe.");
-        currentImageIndex_state = 0;
-      } else if (imgState === "not_safe") {
-        console.log("L'immagine è not safe.");
-        currentImageIndex_state = 1;
-      }
-      updateSupabase("safe_or_not", currentImageIndex_state);
-      console.log("percorso " + currentImageIndex_state + " iniziato");
-      // Aggiorna la flag e l'ultimo indice processato
-      imgStateFlag = true;
-      lastProcessedIndex = currentIndex;
-    }
   }
 
   //updateSupabase("image_index", currentIndex);
