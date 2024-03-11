@@ -124,6 +124,7 @@ function handleState() {
       showCaptionAndButtons();
       break;
     case state.STATE_FEEDBACK:
+      updateSupabase("image_index", currentImageIndex);
       showFeedback();
       break;
     case state.STATE_SHUFFLING:
