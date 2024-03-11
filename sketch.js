@@ -2,7 +2,7 @@
 
 let imagesData = []; // Array per memorizzare i dati JSON
 let images = []; // Array per memorizzare gli oggetti delle immagini caricate
-
+let debounceTimer; // Timer per il debounce
 ///////////////////////////////////////////// FUNZIONE PER AGGIORNARE IL DATABASE CON I VALORI ATTUALI ///////////////////////////////////////////
 // updateSupabase(variableName, newValue)
 
@@ -101,15 +101,15 @@ function updateDisplayedImage() {
 function handleState() {
   switch (currentState) {
     case state.STATE_IDLE:
-      updateSupabase("start", 0);
+      debounceUpdateSupabase("start", 0);
       console.log("start: ", 0);
+      debounceUpdateSupabase("current_state", 0);
+      console.log("current_state: ", "stateIdle");
       showImages();
       break;
     case state.STATE_IMAGE_PROPERTIES:
-      updateSupabase("image_index", currentImageIndex);
       let imgState = jsonData[currentImageIndex].state;
-      updateSupabase("safe_or_not", imgState === "safe" ? 0 : 1);
-      console.log("l'immagine è: " + imgState);
+      debounceUpdateSupabase("safe_or_not", imgState === "safe" ? 0 : 1);
       showImageProperties();
       break;
     case state.STATE_BOUNDING_BOXES:
@@ -136,7 +136,6 @@ const start_but = document.getElementById("start_but");
 function showImages() {
   // Seleziona l'elemento HTML in cui verranno mostrate le immagini
   const imgContainer = document.getElementById("img");
-
   // Funzione per mostrare un'immagine casuale
   function displayRandomImage() {
     if (jsonData.length > 0) {
@@ -167,7 +166,7 @@ function showImages() {
     clearInterval(window.imageDisplayInterval);
     console.log("started");
     start_but.style.display = "none";
-    updateSupabase("start", 1);
+    debounceUpdateSupabase("start", 1);
     console.log("start: ", 1);
   });
 }
@@ -177,10 +176,9 @@ const propertiesElement = document.createElement("p");
 
 ///////////////// SECONDA SCENA ////////////////
 function showImageProperties() {
-  let imgState = jsonData[currentImageIndex].state;
-
-  console.log("safe_or_not: ", imgState);
-
+  // updateSupabase("image_index", currentImageIndex);
+  // let imgState = jsonData[currentImageIndex].state;
+  // console.log("l'immagine è: " + imgState);
   // Mostra le proprietà dell'immagine corrente
   // Assicurati che l'indice dell'immagine corrente sia valido
   setTimeout(() => {
@@ -203,7 +201,7 @@ function showImageProperties() {
       animateText(metadataText, metadataElement);
     }
   }, 3000);
-  console.log(currentState);
+  // console.log(currentState);
 }
 function animateText(text, element) {
   let i = 0,
@@ -245,6 +243,8 @@ function animateText(text, element) {
 }
 ///////////////// TERZA SCENA ////////////////
 function showBoundingBoxes() {
+  debounceUpdateSupabase("current_state", 2);
+  console.log("current_state: ", "stateBoundingBoxes");
   if (currentImageIndex >= 0 && currentImageIndex < jsonData.length) {
     const imgContainer = document.getElementById("img");
     // Rimuovi eventuali bounding box precedenti
@@ -346,7 +346,6 @@ function createBoundingBox(container, det, detectionType) {
 }
 ///////////////// QUARTA SCENA ////////////////
 function showCaptionAndButtons() {
-  console.log(currentState);
   removeBoundingBoxes();
   console.log("Tutti i bounding box sono stati rimossi.");
 
@@ -400,6 +399,9 @@ function showCaptionAndButtons() {
 }
 ///////////////// NUOVA SCENA XDLOL - QUINTA SCENA////////////////
 function showFeedback() {
+  // debounceUpdateSupabase("current_state", 4);
+  console.log("current_state: ", "stateFeedback");
+
   const imageState = jsonData[currentImageIndex].state;
   const imageDiv = document.getElementById("imgState"); // Modificato per puntare a #imgState
   const imageEyeDiv = document.getElementById("imgStateEye");
@@ -426,6 +428,8 @@ function showFeedback() {
 }
 
 function shuffleImages() {
+  debounceUpdateSupabase("current_state", 5);
+  console.log("current_state: ", "stateShuffling");
   console.log("Shuffling images...");
   const imgContainer = document.getElementById("img");
 
@@ -477,5 +481,11 @@ async function loadJsonData() {
   jsonData = await fetch("label.json").then((response) => response.json());
 }
 
+function debounceUpdateSupabase(variableName, newValue, delay = 300) {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(() => {
+    updateSupabase(variableName, newValue);
+  }, delay);
+}
 init();
 ///////////////////////////////////////////////// ////////////////////////////////////////////////
