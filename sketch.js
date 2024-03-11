@@ -114,6 +114,7 @@ function handleState() {
       break;
     case state.STATE_IMAGE_PROPERTIES:
       let imgState = jsonData[currentImageIndex].state;
+      updateSupabase("image_index", currentImageIndex);
       updateSupabase("safe_or_not", imgState === "safe" ? 0 : 1);
       showImageProperties();
       break;
@@ -124,7 +125,6 @@ function handleState() {
       showCaptionAndButtons();
       break;
     case state.STATE_FEEDBACK:
-      updateSupabase("image_index", currentImageIndex);
       showFeedback();
       break;
     case state.STATE_SHUFFLING:
