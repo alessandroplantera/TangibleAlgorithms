@@ -96,12 +96,17 @@ function updateDisplayedImage() {
     imgContainer.style.backgroundImage = `url('FINAL_RESIZED/${imageInfo.file_name}')`;
   }
 }
-
+function debounceUpdateSupabase(variableName, newValue, delay = 100) {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(() => {
+    updateSupabase(variableName, newValue);
+  }, delay);
+}
 ///////////////////////////////////////////// SWITCH PER CAMBIO SCENE ///////////////////////////////////////////
 function handleState() {
   switch (currentState) {
     case state.STATE_IDLE:
-      debounceUpdateSupabase("start", 0);
+      updateSupabase("start", 0);
       console.log("start: ", 0);
       debounceUpdateSupabase("current_state", 0);
       console.log("current_state: ", "stateIdle");
@@ -481,11 +486,5 @@ async function loadJsonData() {
   jsonData = await fetch("label.json").then((response) => response.json());
 }
 
-function debounceUpdateSupabase(variableName, newValue, delay = 300) {
-  clearTimeout(debounceTimer);
-  debounceTimer = setTimeout(() => {
-    updateSupabase(variableName, newValue);
-  }, delay);
-}
 init();
 ///////////////////////////////////////////////// ////////////////////////////////////////////////
