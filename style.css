@@ -79,6 +79,11 @@
     border-color: rgb(254, 1, 86); /* Esempio: colore del bordo per roboflow_detections */
   }
 
+#safe_but, #not_safe_but {
+  padding: 40px; /* Aggiunge uno spazio cliccabile intorno al bottone */
+  margin: -40px; /* Opzionale: compensa l'aumento di dimensione per mantenere la posizione */
+  }
+
   #safe_but{
   position: absolute;
   top:300px;
