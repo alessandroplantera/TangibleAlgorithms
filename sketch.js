@@ -96,7 +96,7 @@ function updateDisplayedImage() {
     imgContainer.style.backgroundImage = `url('FINAL_RESIZED/${imageInfo.file_name}')`;
   }
 }
-function debounceUpdateSupabase(variableName, newValue, delay = 100) {
+function debounceUpdateSupabase(variableName, newValue, delay = 250) {
   clearTimeout(debounceTimer);
   debounceTimer = setTimeout(() => {
     updateSupabase(variableName, newValue);
@@ -108,13 +108,13 @@ function handleState() {
     case state.STATE_IDLE:
       updateSupabase("start", 0);
       console.log("start: ", 0);
-      debounceUpdateSupabase("current_state", 0);
+      updateSupabase("current_state", 0);
       console.log("current_state: ", "stateIdle");
       showImages();
       break;
     case state.STATE_IMAGE_PROPERTIES:
       let imgState = jsonData[currentImageIndex].state;
-      debounceUpdateSupabase("safe_or_not", imgState === "safe" ? 0 : 1);
+      updateSupabase("safe_or_not", imgState === "safe" ? 0 : 1);
       showImageProperties();
       break;
     case state.STATE_BOUNDING_BOXES:
@@ -171,7 +171,7 @@ function showImages() {
     clearInterval(window.imageDisplayInterval);
     console.log("started");
     start_but.style.display = "none";
-    debounceUpdateSupabase("start", 1);
+    updateSupabase("start", 1);
     console.log("start: ", 1);
   });
 }
@@ -248,7 +248,7 @@ function animateText(text, element) {
 }
 ///////////////// TERZA SCENA ////////////////
 function showBoundingBoxes() {
-  debounceUpdateSupabase("current_state", 2);
+  updateSupabase("current_state", 2);
   console.log("current_state: ", "stateBoundingBoxes");
   if (currentImageIndex >= 0 && currentImageIndex < jsonData.length) {
     const imgContainer = document.getElementById("img");
@@ -404,7 +404,7 @@ function showCaptionAndButtons() {
 }
 ///////////////// NUOVA SCENA XDLOL - QUINTA SCENA////////////////
 function showFeedback() {
-  // debounceUpdateSupabase("current_state", 4);
+  // updateSupabase("current_state", 4);
   console.log("current_state: ", "stateFeedback");
 
   const imageState = jsonData[currentImageIndex].state;
@@ -433,7 +433,7 @@ function showFeedback() {
 }
 
 function shuffleImages() {
-  debounceUpdateSupabase("current_state", 5);
+  updateSupabase("current_state", 5);
   console.log("current_state: ", "stateShuffling");
   console.log("Shuffling images...");
   const imgContainer = document.getElementById("img");
