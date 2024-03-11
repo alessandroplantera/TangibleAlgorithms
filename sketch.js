@@ -107,7 +107,9 @@ function handleState() {
       break;
     case state.STATE_IMAGE_PROPERTIES:
       updateSupabase("image_index", currentImageIndex);
+      let imgState = jsonData[currentImageIndex].state;
       updateSupabase("safe_or_not", imgState === "safe" ? 0 : 1);
+      console.log("l'immagine è: " + imgState);
       showImageProperties();
       break;
     case state.STATE_BOUNDING_BOXES:
