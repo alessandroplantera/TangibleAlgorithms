@@ -1,494 +1,479 @@
-const button_start = document.createElement("button");
+///////////////////////////////////////////// CARICAMENTO DEL JSON E POPOLAMENTO ARRAY ///////////////////////////////////////////
 
-let imagesData; // Questo conterrà i dati JSON
-let images = []; // Array per memorizzare le immagini pre-caricate e i dati associati
+let imagesData = []; // Array per memorizzare i dati JSON
+let images = []; // Array per memorizzare gli oggetti delle immagini caricate
 
-// BBOX
-// Variabili per il controllo del flusso dei bounding box e dei tipi di detection
-let detectionTypes = ["yolo_detections", "roboflow_detections"];
-let currentDetectionIndex = 0; // Indice per alternare tra YOLO e Roboflow
-let currentBboxIndex = -1;
-let detectionQueue = []; // Coda per tenere traccia di tutti i bounding box da disegnare
+///////////////////////////////////////////// FUNZIONE PER AGGIORNARE IL DATABASE CON I VALORI ATTUALI ///////////////////////////////////////////
+// updateSupabase(variableName, newValue)
 
-// TIME FLAG PER I BOUNDING BOX
-let allDetections = []; // Array per memorizzare tutti i bounding box e i loro tipi
-let lastBboxDrawTime = 0;
-const bboxDrawInterval = 250;
-let postDrawDelayStarted = false;
-let postDrawDelayTime = 5000;
-let detectionsDrawn = false; // Indica se tutti i bounding box sono stati disegnati
-
-// SAFE OR NOT
-let buttonSafe, buttonNotSafe;
-let imgStateFlag = false; // Flag to track if console log has been shown
-
-// FEEDBACK
-let feedBackSafe, feedBackNotsafe;
-let startTime = -1; // Imposta a -1 per indicare che il timer non è attivo
-
-// STATI
-let state_idle = 0;
-let state_metadata_show = 1;
-let state_bounding = 2;
-//stateboundingdone(?)
-let state_dialog = 3;
-let state_feedback = 4;
-
-// MAIN STATE VARIABLES
-let current_state = state_idle;
-let currentImageIndex_state = -1;
-let currentIndex = 0; // Indice per tenere traccia dell'immagine corrente da visualizzare
-
-// TIME FLAG PER IL TESTO
-let showText = false; // Variabile globale per controllare la visualizzazione del testo
-let timestamp = 0; // Memorizza il momento in cui l'immagine viene mostrata
-let state_change_delay = 2000; // Ritardo prima di cambiare stato (2 secondi)
-let properties_display_duration = 10000; // Durata per cui le proprietà rimangono visualizzate prima di cambiare stato
-
-function preload() {
-  loadJSON("label.json", function (loadedJson) {
-    if (Array.isArray(loadedJson)) {
-      imagesData = loadedJson;
-      imagesData.forEach((item, index) => {
-        let imagePath = "dataset_upd/" + item.file_name;
-        loadImage(imagePath, function (img) {
-          if (img) {
-            images.push({
-              img: img,
-              file_name: item.file_name,
-              caption: item.caption,
-              yolo_detections: item.yolo_detections,
-              roboflow_detections: item.roboflow_detections,
-              image_properties: item.image_properties,
-              state: item.state,
-            });
-          } else {
-            console.error(`Impossibile caricare l'immagine: ${imagePath}`);
-          }
-        });
-      });
-    } else {
-      console.error("Il JSON caricato non è un array.");
-    }
-  });
-  buttonSafe = loadImage("assets/safe.png");
-  buttonNotSafe = loadImage("assets/not_safe.png");
-  feedBackSafe = loadImage("assets/feedbackSafe.png");
-  feedBackNotsafe = loadImage("assets/feedbackNotsafe.png");
-  buttonStart = loadImage("assets/button_start.png");
-  font = loadFont("assets/IBMPlexMono-Light.ttf");
-  fontMedium = loadFont("assets/IBMPlexMono-Medium.ttf");
-}
-
-function setup() {
-  createCanvas(834, 1194);
-  colorMode(RGB, 255);
-  updateSupabase("start", 0);
-  //frameRate(1); // Regola secondo necessità
-}
-
-let lastProcessedIndex = -1; // Inizializza con un valore che non corrisponderà mai a un indice valido
-function draw() {
-  background(220);
-  let imgState = images[currentIndex].state;
-  // Controlla se l'indice dell'immagine è cambiato
-  if (!current_state == state_idle) {
-    if (currentIndex !== lastProcessedIndex) {
-      // Il blocco di codice qui verrà eseguito solo quando l'indice dell'immagine cambia
-      if (imgState === "safe") {
-        console.log("L'immagine è safe.");
-        currentImageIndex_state = 0;
-      } else if (imgState === "not_safe") {
-        console.log("L'immagine è not safe.");
-        currentImageIndex_state = 1;
+function loadJson() {
+  fetch("label.json")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-      updateSupabase("safe_or_not", currentImageIndex_state);
-      console.log("percorso " + currentImageIndex_state + " iniziato");
-      // Aggiorna la flag e l'ultimo indice processato
-      imgStateFlag = true;
-      lastProcessedIndex = currentIndex;
-    }
-  }
-  if (current_state == state_idle) {
-    showSequentialImages();
-    image(
-      buttonStart,
-      width / 2 - buttonStart.width / 2,
-      height / 2 - buttonStart.height / 2
-    );
-  }
-  if (current_state == state_metadata_show) {
-    showMetadata();
-  }
-
-  if (current_state == state_bounding) {
-    showBoundingBoxes();
-  }
-  if (current_state == state_dialog) {
-    showDialog();
-  }
-  if (current_state == state_feedback) {
-    showFeedback();
-  }
-
-  //updateSupabase("image_index", currentIndex);
-  //updateSupabase("safe_or_not", currentImageIndex_state);
-}
-
-// Main Functions
-//    Idle State managing
-function showSequentialImages() {
-  // Controlla se ci sono immagini e se l'indice corrente è valido
-  if (images.length > 0 && currentIndex < images.length) {
-    let imgObj = images[currentIndex].img;
-    image(imgObj, 0, 0, width, height);
-    fill(255);
-    noStroke();
-    textSize(16);
-    // Aggiunta di una logica per incrementare l'indice e resettarlo se necessario
-    currentIndex++;
-    // console.log(currentIndex);
-    if (currentIndex >= images.length) {
-      currentIndex = 0; // Resettare l'indice per ricominciare dall'inizio
-    }
-  }
-}
-
-//    Safe State managing
-function showMetadata() {
-  if (images.length > 0 && imagesData) {
-    let imgData = images[currentIndex];
-    let imgObj = images[currentIndex].img;
-    image(imgObj, 0, 0, width, height);
-    fill(0, 0, 0, 80);
-    rect(0, 0, width, height);
-    noFill();
-    let currentTime = millis();
-    if (timestamp === 0) {
-      timestamp = currentTime; // Imposta il timestamp se è la prima volta
-    }
-
-    let typingSpeed = 5; // Velocità di "digitazione" in millisecondi per lettera
-
-    if (
-      currentTime - timestamp > state_change_delay &&
-      currentTime - timestamp < properties_display_duration
-    ) {
-      let yPos = 40; // Posizione di inizio per il testo sul canvas
-      textFont(font);
-      fill(255); // Colore del testo
-      noStroke();
-
-      // Calcola il numero di lettere da mostrare in base al tempo trascorso
-      let elapsed = currentTime - timestamp - state_change_delay;
-      let lettersToShow = Math.floor(elapsed / typingSpeed);
-
-      // Funzione per ottenere il testo "animato"
-      function animatedText(fullText, x, y, maxLetters) {
-        text(fullText.substring(0, maxLetters), x, y);
-      }
-
-      // Nome immagine
-      let imgNameText = `Nome immagine: ${imgData.file_name}`;
-      textSize(22);
-      if (lettersToShow > imgNameText.length) {
-        lettersToShow -= imgNameText.length;
+      return response.json();
+    })
+    .then((loadedJson) => {
+      if (Array.isArray(loadedJson)) {
+        imagesData = loadedJson;
+        loadImages(); // Carica le immagini dopo aver caricato il JSON
       } else {
-        imgNameText = imgNameText.substring(0, lettersToShow);
-        lettersToShow = 0;
+        console.error("Il JSON caricato non è un array.");
       }
-      text(imgNameText, 10, yPos);
-      yPos += 21;
-
-      if (lettersToShow > 0) {
-        let propertiesText = "Proprietà immagine:";
-        textSize(18);
-        if (lettersToShow > propertiesText.length) {
-          lettersToShow -= propertiesText.length;
-        } else {
-          propertiesText = propertiesText.substring(0, lettersToShow);
-          lettersToShow = 0;
-        }
-        text(propertiesText, 10, yPos + 80);
-        yPos += 21;
-
-        Object.keys(imgData.image_properties).forEach((key) => {
-          textSize(18);
-          if (lettersToShow > 0) {
-            let propText = `${key}: ${imgData.image_properties[key]}`;
-            if (lettersToShow > propText.length) {
-              lettersToShow -= propText.length;
-            } else {
-              propText = propText.substring(0, lettersToShow);
-              lettersToShow = 0;
-            }
-            text(propText, 50, yPos + 80);
-            yPos += 21;
-          }
-        });
-      }
-    } else if (currentTime - timestamp > properties_display_duration) {
-      current_state = state_bounding;
-      timestamp = 0; // Resetta il timestamp per il prossimo ciclo
-    }
-  }
-}
-
-function showMetadataOnlyText() {
-  let imgData = images[currentIndex];
-  let currentTime = millis();
-  if (timestamp === 0) {
-    // Se è la prima volta, imposta il timestamp
-    timestamp = currentTime;
-  }
-  // Controlla se sono trascorsi 2 secondi per mostrare le proprietà
-  if (
-    currentTime - timestamp > state_change_delay &&
-    currentTime - timestamp < properties_display_duration
-  ) {
-    let yPos = 40; // Posizione di inizio per il testo sul canvas
-    fill(255); // Colore del testo
-    noStroke();
-    textSize(22);
-    text(`Nome immagine: ${imgData.file_name}`, 10, yPos);
-    yPos += 30;
-    text(`Proprietà immagine:`, 10, yPos);
-    yPos += 30;
-    Object.keys(imgData.image_properties).forEach((key) => {
-      text(`${key}: ${imgData.image_properties[key]}`, 20, yPos);
-      yPos += 30;
+    })
+    .catch((error) => {
+      console.error("Errore nel caricamento del JSON:", error);
     });
-  } else if (currentTime - timestamp > properties_display_duration) {
-    // Cambia lo stato dopo che le proprietà sono state mostrate per un certo tempo
-    current_state = state_bounding;
-    timestamp = 0; // Resetta il timestamp per il prossimo ciclo
-  }
 }
 
-function setupDetectionQueue() {
-  let itemData = images[currentIndex];
-  detectionTypes.forEach((detectionType) => {
-    let detections = itemData[detectionType] || [];
-    detections.forEach((det) => allDetections.push({ det, detectionType }));
+///////////////////////////////////////////// FUNZIONE PER IL POPOLAMENTO ARRAY///////////////////////////////////////////
+
+function loadImages() {
+  imagesData.forEach((item) => {
+    let imagePath = "FINAL_RESIZED/" + item.file_name;
+    let img = new Image(); // Crea un nuovo elemento immagine
+    img.onload = function () {
+      images.push({
+        img: img,
+        file_name: item.file_name,
+        caption: item.caption,
+        yolo_detections: item.yolo_detections,
+        roboflow_detections: item.roboflow_detections,
+        nude_detections: item.nude_detections,
+        image_properties: item.image_properties,
+        state: item.state,
+      });
+    };
+    img.onerror = function () {
+      console.error(`Impossibile caricare l'immagine: ${imagePath}`);
+    };
+    img.src = imagePath;
   });
 }
 
-function showBoundingBoxes() {
-  let currentTime = millis();
-  let imgObj = images[currentIndex].img;
-  image(imgObj, 0, 0, width, height);
-  fill(0, 0, 0, 80);
-  rect(0, 0, width, height);
-  noFill();
-  // Se non abbiamo ancora iniziato a disegnare, inizializziamo
-  if (allDetections.length === 0 && !detectionsDrawn) {
-    setupDetectionQueue();
-    lastBboxDrawTime = currentTime; // Resetta il tempo per il primo disegno
+// Chiamata alla funzione per iniziare il caricamento del JSON
+loadJson();
+
+///////////////////////////////////////////// INIZIALIZZAZIONE STATI///////////////////////////////////////////
+const state = {
+  STATE_IDLE: "stateIdle",
+  STATE_IMAGE_PROPERTIES: "stateImageProperties",
+  STATE_BOUNDING_BOXES: "stateBoundingBoxes",
+  STATE_CAPTION_AND_BUTTONS: "stateCaptionAndButtons",
+  STATE_FEEDBACK: "stateFeedback",
+  STATE_SHUFFLING: "stateShuffling",
+};
+
+// Variabile per tenere traccia dello stato attuale
+let currentState = state.STATE_IDLE;
+// Indice dell'immagine corrente
+let currentImageIndex = 0;
+
+///////////////////////////////////////////// GESTIONE DELLO SWITCH CON VARIABILE PER INCREMENTARE L'INDICE DOPO IL PRIMO CICLO ///////////////////////////////////////////
+let isFirstAccessToImageProperties = true;
+function switchState(newState) {
+  // Controllo specifico per STATE_IMAGE_PROPERTIES
+  if (
+    newState === state.STATE_IMAGE_PROPERTIES &&
+    !isFirstAccessToImageProperties
+  ) {
+    // Incrementa l'indice dell'immagine, ciclando se necessario
+    currentImageIndex = Math.floor(Math.random() * jsonData.length);
+    // Aggiorna l'immagine visualizzata
+    updateDisplayedImage();
+  } else if (newState === state.STATE_IMAGE_PROPERTIES) {
+    // Marca il primo accesso completato
+    isFirstAccessToImageProperties = false;
+  }
+  currentState = newState;
+  handleState();
+}
+function updateDisplayedImage() {
+  const imgContainer = document.getElementById("img");
+  if (jsonData.length > 0) {
+    const imageInfo = jsonData[currentImageIndex];
+    imgContainer.style.backgroundImage = `url('FINAL_RESIZED/${imageInfo.file_name}')`;
+  }
+}
+
+///////////////////////////////////////////// SWITCH PER CAMBIO SCENE ///////////////////////////////////////////
+function handleState() {
+  switch (currentState) {
+    case state.STATE_IDLE:
+      updateSupabase("start", 0);
+      console.log("start: ", 0);
+      showImages();
+      break;
+    case state.STATE_IMAGE_PROPERTIES:
+      updateSupabase("image_index", currentImageIndex);
+      updateSupabase("safe_or_not", imgState === "safe" ? 0 : 1);
+      showImageProperties();
+      break;
+    case state.STATE_BOUNDING_BOXES:
+      showBoundingBoxes();
+      break;
+    case state.STATE_CAPTION_AND_BUTTONS:
+      showCaptionAndButtons();
+      break;
+    case state.STATE_FEEDBACK:
+      showFeedback();
+      break;
+    case state.STATE_SHUFFLING:
+      shuffleImages();
+      break;
+  }
+}
+
+///////////////////////////////////////////// FUNZIONI DI COMPORTAMENTO PER OGNI STATO///////////////////////////////////////////
+
+const debugElement = document.querySelectorAll("#debug");
+const start_but = document.getElementById("start_but");
+
+///////////////// PRIMA SCENA ////////////////
+function showImages() {
+  // Seleziona l'elemento HTML in cui verranno mostrate le immagini
+  const imgContainer = document.getElementById("img");
+
+  // Funzione per mostrare un'immagine casuale
+  function displayRandomImage() {
+    if (jsonData.length > 0) {
+      // Scegli un indice casuale dall'array di dati JSON
+      currentImageIndex = Math.floor(Math.random() * jsonData.length);
+      // Ottieni i dati dell'immagine corrente
+      const imageInfo = jsonData[currentImageIndex];
+      // Imposta l'immagine come sfondo di imgContainer
+      imgContainer.style.backgroundImage = `url('FINAL_RESIZED/${imageInfo.file_name}')`;
+    }
+
+    // Mostra l'indice dell'immagine corrente nell'elemento debug
   }
 
-  // Se è il momento di disegnare un nuovo bounding box
-  if (
-    !detectionsDrawn &&
-    currentTime - lastBboxDrawTime >= bboxDrawInterval &&
-    allDetections.length > 0
-  ) {
-    lastBboxDrawTime = currentTime;
-    // Aumenta l'indice di disegno fino a quando non abbiamo disegnato tutti
-    if (!detectionsDrawn) {
-      currentBboxIndex++;
-      if (currentBboxIndex >= allDetections.length) {
-        detectionsDrawn = true;
-        lastBboxDrawTime = currentTime; // Inizia il conteggio del ritardo dopo l'ultimo bbox
+  // Mostra un'immagine casuale ogni N secondi (es. 3 secondi)
+  const interval = 150; // 100ms
+  const imageDisplayInterval = setInterval(displayRandomImage, interval);
+
+  // Memorizza l'intervallo per poterlo cancellare più tardi
+  window.imageDisplayInterval = imageDisplayInterval;
+
+  // clearInterval(window.imageDisplayInterval) per fermare il ciclo quando necessario,
+  // ad esempio, quando l'utente preme il bottone "Start".
+
+  // Quando l'utente preme "Start", chiama switchState(state.STATE_IMAGE_PROPERTIES)
+  start_but.addEventListener("click", function () {
+    switchState(state.STATE_IMAGE_PROPERTIES);
+    clearInterval(window.imageDisplayInterval);
+    console.log("started");
+    start_but.style.display = "none";
+    updateSupabase("start", 1);
+    console.log("start: ", 1);
+  });
+}
+const metadataElement = document.getElementById("metadata");
+const fileNameElement = document.createElement("p");
+const propertiesElement = document.createElement("p");
+
+///////////////// SECONDA SCENA ////////////////
+function showImageProperties() {
+  let imgState = jsonData[currentImageIndex].state;
+
+  console.log("safe_or_not: ", imgState);
+
+  // Mostra le proprietà dell'immagine corrente
+  // Assicurati che l'indice dell'immagine corrente sia valido
+  setTimeout(() => {
+    if (currentImageIndex >= 0 && currentImageIndex < jsonData.length) {
+      const { file_name, image_properties } = jsonData[currentImageIndex];
+
+      // Svuota il contenuto precedente di metadataElement
+      metadataElement.innerHTML = "";
+
+      // Crea e aggiungi il nome del file e le proprietà dell'immagine in un unico elemento <p>
+      let metadataText = `<mark>Filename: ${file_name}</mark><br><mark>Image Properties:</mark><br>`;
+
+      // Concatena le proprietà in una singola stringa
+      for (const [key, value] of Object.entries(image_properties)) {
+        metadataText += `<mark>${key}: ${value}</mark><br>`; // Usa '\n' per andare a capo nel testo
+      }
+
+      // Imposta il testo concatenato come contenuto dell'elemento <p>
+      // Prepara il testo per l'animazione, escludendo i tag HTML
+      animateText(metadataText, metadataElement);
+    }
+  }, 3000);
+  console.log(currentState);
+}
+function animateText(text, element) {
+  let i = 0,
+    isTag,
+    textHTML = "";
+
+  function typeWriter() {
+    if (i < text.length) {
+      isTag = false;
+
+      // Completa il tag se inizia con '<' e non finisce con '>'
+      if (text[i] === "<") {
+        isTag = true;
+        textHTML += "<";
+        i++;
+        while (text[i] !== ">") {
+          textHTML += text[i];
+          i++;
+        }
+        textHTML += ">";
+      } else {
+        textHTML += text[i];
+      }
+
+      i++;
+      element.innerHTML = textHTML;
+
+      if (isTag) {
+        typeWriter();
+      } else {
+        setTimeout(typeWriter, 20); // Regola il tempo per modificare la velocità
+      }
+    } else {
+      setTimeout(() => switchState(state.STATE_BOUNDING_BOXES), 2000);
+    }
+  }
+
+  typeWriter();
+}
+///////////////// TERZA SCENA ////////////////
+function showBoundingBoxes() {
+  if (currentImageIndex >= 0 && currentImageIndex < jsonData.length) {
+    const imgContainer = document.getElementById("img");
+    // Rimuovi eventuali bounding box precedenti
+    const existingBoxes = imgContainer.querySelectorAll(".bbox");
+    existingBoxes.forEach((box) => box.remove());
+
+    // Combina yolo_detections e roboflow_detections in un unico array
+    const detections = [
+      ...jsonData[currentImageIndex].yolo_detections.map((det) => ({
+        ...det,
+        type: "yolo_detection",
+      })),
+      ...jsonData[currentImageIndex].roboflow_detections.map((det) => ({
+        ...det,
+        type: "roboflow_detection",
+      })),
+      ...jsonData[currentImageIndex].nude_detections.map((det) => ({
+        ...det,
+        type: "nude_detection",
+      })),
+    ];
+
+    // Funzione per mostrare la bounding box una alla volta
+    function showBoundingBox(index) {
+      if (index < detections.length) {
+        const det = detections[index];
+        createBoundingBox(imgContainer, det, det.type);
+
+        // Attendi per un determinato periodo di tempo prima di mostrare la prossima bounding box
+        setTimeout(() => showBoundingBox(index + 1), 100); // Modifica il tempo di attesa se necessario
+      } else {
+        // Una volta che tutte le bounding box sono state mostrate, procedi al passaggio successivo
+        propertiesElement.innerHTML = "";
+        metadataElement.innerHTML = "";
+        console.log(currentState);
+        // Dopo un certo periodo, passa al prossimo stato
+        setTimeout(() => switchState(state.STATE_CAPTION_AND_BUTTONS), 5000); // Modifica il tempo di attesa se necessario
       }
     }
-  }
 
-  // Ridisegna tutti i bounding box disegnati finora
-  for (let i = 0; i < currentBboxIndex; i++) {
-    let { det, detectionType } = allDetections[i];
-    drawDetection(det, detectionType);
-  }
-
-  // Dopo aver disegnato l'ultimo bounding box, attendi 2 secondi prima di cambiare lo stato
-  if (detectionsDrawn && currentTime - lastBboxDrawTime >= postDrawDelayTime) {
-    // Cambia lo stato in 'dialog'
-    current_state = state_dialog;
-    // Reset per il prossimo ciclo
-    allDetections = [];
-    detectionsDrawn = false;
-    currentBboxIndex = 0;
-    postDrawDelayStarted = false;
+    // Inizia a mostrare le bounding box dalla prima
+    showBoundingBox(0);
   }
 }
 
-function drawDetection(det, detectionType) {
-  let bbox = det.bbox;
-  let className = det.class_name;
-  let confidence = det.confidence;
+// Funzione helper per creare e aggiungere i bounding box
+function createBoundingBox(container, det, detectionType) {
+  // Assicurati che le dimensioni originali siano accessibili
+  const imageInfo = jsonData[currentImageIndex]; // Assumi che questa variabile sia accessibile
+  const dimensions = imageInfo.image_properties.dimensions; // "1080x1072"
+  const [originalWidth, originalHeight] = dimensions.split("x").map(Number);
+  const { width: displayedWidth, height: displayedHeight } =
+    container.getBoundingClientRect();
 
-  stroke(detectionType === "yolo_detections" ? [180, 255, 0] : [254, 1, 86]);
-  strokeWeight(4);
-  fill(
-    detectionType === "yolo_detections" ? [180, 255, 0, 30] : [254, 1, 86, 30]
-  );
+  const scaleX = displayedWidth / originalWidth;
+  const scaleY = displayedHeight / originalHeight;
 
-  rect(bbox[0], bbox[1], bbox[2] - bbox[0], bbox[3] - bbox[1]);
-  textFont(fontMedium);
-  textSize(16);
-  let textStr = `${className}: ${confidence.toFixed(2)}`;
-  let textWidthVal = textWidth(textStr);
+  const bboxDiv = document.createElement("div");
+  bboxDiv.classList.add("bbox", detectionType); // Usa classi per applicare stili CSS
+  bboxDiv.style.left = `${det.bbox[0] * scaleX}px`;
+  bboxDiv.style.top = `${det.bbox[1] * scaleY}px`;
+  bboxDiv.style.width = `${(det.bbox[2] - det.bbox[0]) * scaleX}px`;
+  bboxDiv.style.height = `${(det.bbox[3] - det.bbox[1]) * scaleY}px`;
+  bboxDiv.style.boxSizing = "border-box";
 
-  fill(detectionType === "yolo_detections" ? [180, 255, 0] : [254, 1, 86]);
-  noStroke();
-  rect(bbox[0] - 2, bbox[1] - 22, textWidthVal + 4, 24);
+  // Crea un elemento per il testo con class_name e confidence
+  const textDiv = document.createElement("div");
+  textDiv.textContent = `${det.class_name} (${(det.confidence * 100).toFixed(
+    1
+  )}%)`;
+  textDiv.style.position = "absolute";
+  textDiv.style.left = "-3px";
+  textDiv.style.top = "-26px";
+  textDiv.style.padding = "2px 5px";
+  textDiv.style.fontSize = "18px";
+  textDiv.style.color = "Black";
 
-  fill(0); // Colore del testo a nero
-  // Sostituisci il calcolo di textY con un valore fisso appropriato
-  let textY = bbox[1] - 22; // Regola questo valore per centrare il testo nel tuo rettangolo
-  let textX = textStr + 4;
-  // console.log("ciao");
-  text(textX, bbox[0] - 2, textY);
-}
-
-function showDialog() {
-  updateSupabase("current_state", 3);
-  let imgObj = images[currentIndex].img;
-  let imgCaption = images[currentIndex].caption;
-  image(imgObj, 0, 0, width, height);
-  // Utilizza showDialogTimestampInitialized per inizializzare solo una volta
-  if (!showDialogTimestampInitialized) {
-    timestamp = millis(); // Solo la prima volta
-    showDialogTimestampInitialized = true;
+  // Scegli il colore dello sfondo basato sul tipo di detection
+  let backgroundColor;
+  switch (detectionType) {
+    case "yolo_detection":
+      backgroundColor = "rgb(128, 255, 0)"; // colore del bordo per yolo_detections
+      break;
+    case "roboflow_detection":
+      backgroundColor = "rgb(138, 20, 255)"; // colore del bordo per roboflow_detections
+      break;
+    case "nude_detection":
+      backgroundColor = "rgb(254, 1, 86)"; // colore del bordo per nude_detections
+      break;
+    default:
+      backgroundColor = "rgba(0,0,0,0.5)"; // Colore di default nel caso non sia né yolo né roboflow
   }
-  let typingSpeed = 10; // Velocità di digitazione in millisecondi per lettera
-  fill(0, 0, 0, 120);
-  rect(0, 0, width, height);
-  fill(255);
-  // Add caption Title
-  textFont(font);
-  fill(255); // White color
-  noStroke();
-  textSize(18);
-  textAlign(LEFT, TOP);
-  text("Caption", 10, 120);
-  noStroke();
-  textSize(18);
-  textAlign(LEFT, TOP);
-  textLeading(21);
-  let captionWidth = width - 250;
+  textDiv.style.backgroundColor = backgroundColor;
 
-  let currentTime = millis();
-  let elapsed = currentTime - timestamp;
-  let lettersToShow = Math.floor(elapsed / typingSpeed);
-  let textToShow = imgCaption.substring(0, lettersToShow);
-  text(textToShow, 50, 141, captionWidth); // Mostra il testo animato
+  // Aggiungi il div del testo alla bounding box
+  bboxDiv.appendChild(textDiv);
 
-  // Mostra i bottoni solo dopo che il testo è stato completamente visualizzato
-  if (lettersToShow >= imgCaption.length) {
-    let buttonY = 640;
-    image(buttonSafe, 100, buttonY); // Posiziona il primo bottone
-    image(buttonNotSafe, width - 300, buttonY); // Posiziona il secondo bottone
+  container.appendChild(bboxDiv);
+}
+///////////////// QUARTA SCENA ////////////////
+function showCaptionAndButtons() {
+  console.log(currentState);
+  removeBoundingBoxes();
+  console.log("Tutti i bounding box sono stati rimossi.");
+
+  const caption = jsonData[currentImageIndex].caption;
+  const feedbackElement = document.getElementById("feedback");
+  feedbackElement.innerHTML = ""; // Pulisce il contenuto precedente
+
+  const captionElement = document.createElement("p");
+  captionElement.innerHTML = "<mark>" + "Caption:<br>" + "</mark>";
+  feedbackElement.appendChild(captionElement);
+
+  function typeWriter(text, index, callback) {
+    if (index < text.length) {
+      captionElement.innerHTML += "<mark>" + text.charAt(index) + "</mark>";
+      index++;
+      setTimeout(function () {
+        typeWriter(text, index, callback);
+      }, 20); // Regola questo valore per aumentare o diminuire la velocità di digitazione
+    } else if (callback) {
+      callback(); // Chiama la funzione callback dopo aver finito di scrivere la caption
+    }
+  }
+
+  // Avvia l'animazione della caption e poi aggiusta la posizione dei bottoni
+  typeWriter(caption, 0, function () {
+    captionElement.innerHTML += "<mark>" + "<br>State:" + "<mark>"; // Aggiunge "Stato:" alla fine della caption
+    adjustButtonPositions(); // Aggiusta la posizione dei bottoni come prima
+  });
+  function adjustButtonPositions() {
+    // Aggiusta la posizione dei bottoni basandoti sull'altezza della caption
+    const safeButton = document.getElementById("safe_but");
+    const notSafeButton = document.getElementById("not_safe_but");
+
+    safeButton.removeEventListener("click", handleButtonClick);
+    notSafeButton.removeEventListener("click", handleButtonClick);
+    safeButton.addEventListener("click", handleButtonClick);
+    notSafeButton.addEventListener("click", handleButtonClick);
+    safeButton.style.display = "block";
+    notSafeButton.style.display = "block";
+  }
+
+  function handleButtonClick() {
+    feedbackElement.innerHTML = "";
+    switchState("STATE_SHOW_IMAGES");
+    showFeedback();
+    const safeButton = document.getElementById("safe_but");
+    const notSafeButton = document.getElementById("not_safe_but");
+    safeButton.style.display = "none";
+    notSafeButton.style.display = "none";
   }
 }
+///////////////// NUOVA SCENA XDLOL - QUINTA SCENA////////////////
 function showFeedback() {
-  // Controlla se il timer non è stato ancora impostato
-  if (startTime < 0) {
-    startTime = millis(); // Imposta il timer
-  }
-  let duration = 2000; // 2 seconds
-  let currentTime = millis();
+  const imageState = jsonData[currentImageIndex].state;
+  const imageDiv = document.getElementById("imgState"); // Modificato per puntare a #imgState
+  const imageEyeDiv = document.getElementById("imgStateEye");
+  imageEyeDiv.innerHTML = ""; // Pulisce il contenuto precedente dell'elemento interno
 
-  if (currentImageIndex_state == 0) {
-    let imgObj = images[currentIndex].img;
-    image(imgObj, 0, 0, width, height);
-    fill(0, 0, 0, 80);
-    rect(0, 0, width, height);
-    noFill();
-    image(
-      feedBackSafe,
-      width / 2 - feedBackSafe.width / 2,
-      height / 2 - feedBackSafe.height / 2
-    );
-    if (millis() - startTime >= duration) {
-      current_state = state_metadata_show;
-      currentIndex = Math.floor(Math.random() * images.length);
-    }
-  } else {
-    let imgObj = images[currentIndex].img;
-    image(imgObj, 0, 0, width, height);
-    fill(0, 0, 0, 80);
-    rect(0, 0, width, height);
-    noFill();
-    image(
-      feedBackNotsafe,
-      width / 2 - feedBackSafe.width / 2,
-      height / 2 - feedBackSafe.height / 2
-    );
-    if (millis() - startTime >= duration) {
-      current_state = state_metadata_show;
-      currentIndex = Math.floor(Math.random() * images.length);
-    }
-  }
-  // Controlla se sono passati 2 secondi
-  if (currentTime - startTime >= duration) {
-    current_state = state_metadata_show;
-    currentIndex = Math.floor(Math.random() * images.length);
-    startTime = -1; // Resetta startTime per permettere al timer di essere riavviato in futuro
-  }
+  // Crea l'elemento immagine una volta
+  const imageElement = document.createElement("img");
+  imageElement.src =
+    imageState === "safe" ? "assets/safe.png" : "assets/not_safe.png";
+  imageEyeDiv.appendChild(imageElement);
+
+  // Mostra il div e centra l'immagine
+  imageDiv.style.display = "block";
+
+  // Imposta un timer per nascondere l'immagine dopo 2 secondi
+  setTimeout(() => {
+    imageDiv.style.display = "none";
+  }, 4000);
+
+  // Opzionale: Passa allo stato successivo dopo un ritardo
+  // Se vuoi che questa azione avvenga indipendentemente dal display dell'immagine,
+  // considera di aggiustare il tempo di attesa o spostare questa logica altrove.
+  setTimeout(() => switchState(state.STATE_SHUFFLING), 5000);
 }
 
-// Supplemental Functions
-function mousePressed() {
-  if (current_state == state_dialog) {
-    let buttonY = 640;
-    // Controlla se il click è avvenuto sul bottone "safe"
-    if (
-      mouseX >= 100 &&
-      mouseX <= 100 + buttonSafe.width &&
-      mouseY >= buttonY &&
-      mouseY <= buttonY + buttonSafe.height
-    ) {
-      console.log("Safe button clicked");
-      console.log(currentImageIndex_state);
-      current_state = state_feedback;
-      // currentIndex = Math.floor(Math.random() * images.length);
+function shuffleImages() {
+  console.log("Shuffling images...");
+  const imgContainer = document.getElementById("img");
+
+  // const debugElement = document.getElementById("debug"); // Correzione qui
+  if (window.imageDisplayInterval) {
+    clearInterval(window.imageDisplayInterval);
+  }
+  // Funzione per mostrare un'immagine casuale
+  function displayRandomImage() {
+    if (jsonData.length > 0) {
+      // Scegli un indice casuale dall'array di dati JSON
+      currentImageIndex = Math.floor(Math.random() * jsonData.length);
+      // Ottieni i dati dell'immagine corrente
+      const imageInfo = jsonData[currentImageIndex];
+      // Imposta l'immagine come sfondo di imgContainer
+      imgContainer.style.backgroundImage = `url('FINAL_RESIZED/${imageInfo.file_name}')`;
     }
-    // Controlla se il click è avvenuto sul bottone "not safe"
-    else if (
-      mouseX >= width - 300 &&
-      mouseX <= width - 300 + buttonNotSafe.width &&
-      mouseY >= buttonY &&
-      mouseY <= buttonY + buttonNotSafe.height
-    ) {
-      current_state = state_feedback;
-      console.log(currentImageIndex_state);
-      console.log("Not Safe button clicked");
-      // currentIndex = Math.floor(Math.random() * images.length);
-    }
+    // Mostra l'indice dell'immagine corrente nell'elemento debug
+    // debugElement.innerHTML = `<mark>Current Image Index: ${currentImageIndex}</mark>`;
   }
 
-  if (current_state == state_idle) {
-    if (
-      mouseX >= width / 2 - buttonStart.width / 2 &&
-      mouseX <= width / 2 + buttonStart.width / 2 &&
-      mouseY >= height / 2 - buttonStart.height / 2 &&
-      mouseY <= height / 2 + buttonStart.height / 2
-    ) {
-      updateSupabase("start", 1);
-      console.log("Safe button clicked");
-      console.log(currentImageIndex_state);
-      current_state = state_metadata_show;
-      currentIndex = Math.floor(Math.random() * images.length);
-      showDialogTimestampInitialized = false;
-      timestamp = 0;
-    }
-  }
+  const interval = 150; // 100ms
+  window.imageDisplayInterval = setInterval(displayRandomImage, interval);
+
+  // Termina lo shuffling dopo un certo periodo
+  setTimeout(() => {
+    clearInterval(window.imageDisplayInterval);
+    switchState(state.STATE_IMAGE_PROPERTIES);
+  }, 2000);
 }
 
-// Full screen management
-function keyPressed() {
-  if (key === "f" || key === "F") {
-    let fs = fullscreen(); // Controlla lo stato attuale della modalità a schermo intero
-    fullscreen(!fs); // Attiva/disattiva la modalità a schermo intero
-  }
+///////////////////////////////////////////////// FUNZIONI DI GESTIONE ////////////////////////////////////////////////
+function removeBoundingBoxes() {
+  const imgContainer = document.getElementById("img");
+  const existingBoxes = imgContainer.querySelectorAll(".bbox");
+  existingBoxes.forEach((box) => box.remove());
 }
+// Inizializzazione
+function init() {
+  // Carica i dati JSON e inizia a mostrare le immagini
+  loadJsonData().then(() => {
+    handleState();
+  });
+}
+
+// Funzione per caricare i dati JSON
+async function loadJsonData() {
+  // Usa fetch() o un'altra tecnica per caricare i tuoi dati JSON in jsonData
+  jsonData = await fetch("label.json").then((response) => response.json());
+}
+
+init();
+///////////////////////////////////////////////// ////////////////////////////////////////////////

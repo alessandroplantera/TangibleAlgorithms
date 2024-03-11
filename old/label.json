@@ -1,0 +1,646 @@
+[
+    {
+        "file_name": "IMG_0.jpg",
+        "caption": "A person reclines on a bed while another stands facing away, both set against a floral patterned background, evoking a private, possibly domestic scene.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    664,
+                    271,
+                    1079,
+                    1067
+                ],
+                "confidence": 0.9444904327392578,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    6,
+                    537,
+                    1071,
+                    1072
+                ],
+                "confidence": 0.26848462224006653,
+                "class_id": 59.0,
+                "class_name": "bed"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    768,
+                    786,
+                    843,
+                    988
+                ],
+                "confidence": 0.12318296730518341,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ],
+        "image_properties": {
+            "file_size_kb": 210.4912109375,
+            "codec": "JPEG",
+            "color_mode": "RGB",
+            "dimensions": "1080x1080",
+            "aspect_ratio": 1.0,
+            "megapixels": 1.1664,
+            "creation_date": "Non disponibile"
+        },
+        "state": "not_safe"
+    },
+    {
+        "file_name": "IMG_1.jpg",
+        "caption": "A seafood display at a market, possibly with a double exposure effect creating an overlay of a person's face among the items, giving an eerie artistic composition. A price tag is visible, suggesting a commercial setting.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    664,
+                    271,
+                    1079,
+                    1067
+                ],
+                "confidence": 0.9444904327392578,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    6,
+                    537,
+                    1071,
+                    1072
+                ],
+                "confidence": 0.26848462224006653,
+                "class_id": 59.0,
+                "class_name": "bed"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    768,
+                    786,
+                    843,
+                    988
+                ],
+                "confidence": 0.12318296730518341,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ],
+        "image_properties": {
+            "file_size_kb": 206.5244140625,
+            "codec": "JPEG",
+            "color_mode": "RGB",
+            "dimensions": "1080x1072",
+            "aspect_ratio": 1.007462686567164,
+            "megapixels": 1.15776,
+            "creation_date": "Non disponibile"
+        },
+        "state": "not_safe"
+    },
+    {
+        "file_name": "IMG_2.jpg",
+        "caption": "A person wearing a cat mask, a choker, and chain accessories is licking an ice pop. The setting could be a private space or perhaps part of a costume event or party.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    5,
+                    6,
+                    717,
+                    1277
+                ],
+                "confidence": 0.7589645385742188,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    375,
+                    629,
+                    994,
+                    1823
+                ],
+                "confidence": 0.36385345458984375,
+                "class_id": 5,
+                "class_name": "Facial"
+            },
+            {
+                "bbox": [
+                    507,
+                    1017,
+                    928,
+                    1543
+                ],
+                "confidence": 0.1490001529455185,
+                "class_id": 3,
+                "class_name": "Chains"
+            }
+        ],
+        "image_properties": {
+            "file_size_kb": 86.2451171875,
+            "codec": "JPEG",
+            "color_mode": "RGB",
+            "dimensions": "720x1280",
+            "aspect_ratio": 0.5625,
+            "megapixels": 0.9216,
+            "creation_date": "Non disponibile"
+        },
+        "state": "safe"
+    },
+    {
+        "file_name": "IMG_3.jpg",
+        "caption": "A person is seated in a homely environment, interacting with their body in a manner suggesting personal care or medical self- administration. The setting appears casual and private, with everyday items around.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    247,
+                    0,
+                    1049,
+                    1300
+                ],
+                "confidence": 0.9532427787780762,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    144,
+                    342,
+                    186,
+                    414
+                ],
+                "confidence": 0.6611308455467224,
+                "class_id": 41.0,
+                "class_name": "cup"
+            },
+            {
+                "bbox": [
+                    0,
+                    146,
+                    1033,
+                    1209
+                ],
+                "confidence": 0.5157309174537659,
+                "class_id": 59.0,
+                "class_name": "bed"
+            },
+            {
+                "bbox": [
+                    825,
+                    422,
+                    983,
+                    693
+                ],
+                "confidence": 0.4953669309616089,
+                "class_id": 26.0,
+                "class_name": "handbag"
+            }
+        ],
+        "roboflow_detections": [],
+        "image_properties": {
+            "file_size_kb": 186.763671875,
+            "codec": "JPEG",
+            "color_mode": "RGB",
+            "dimensions": "1080x1302",
+            "aspect_ratio": 0.8294930875576036,
+            "megapixels": 1.40616,
+            "creation_date": "Non disponibile"
+        },
+        "state": "safe"
+    },
+    {
+        "file_name": "IMG_4.jpg",
+        "caption": "Illustration of distinct characters in a split environment: one side with rainfall and gloom, the other bright and steamy, likely a sauna. Varied emotions and interactions, suggesting a contrast between discomfort and relaxation.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    850,
+                    606,
+                    1079,
+                    1070
+                ],
+                "confidence": 0.3238840401172638,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    815,
+                    198,
+                    965,
+                    366
+                ],
+                "confidence": 0.1298198699951172,
+                "class_id": 3,
+                "class_name": "Chains"
+            },
+            {
+                "bbox": [
+                    643,
+                    793,
+                    907,
+                    1354
+                ],
+                "confidence": 0.11036237329244614,
+                "class_id": 5,
+                "class_name": "Facial"
+            }
+        ],
+        "image_properties": {
+            "file_size_kb": 151.7412109375,
+            "codec": "JPEG",
+            "color_mode": "RGB",
+            "dimensions": "1080x1076",
+            "aspect_ratio": 1.003717472118959,
+            "megapixels": 1.16208,
+            "creation_date": "Non disponibile"
+        },
+        "state": "not_safe"
+    },
+    {
+        "file_name": "IMG_5.jpg",
+        "caption": "A person is obscured by colorful, illustrated cutouts arranged to form a character holding a sword. The background suggests a casual, playful setting, possibly an art project or performance.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    124,
+                    3,
+                    1041,
+                    1023
+                ],
+                "confidence": 0.9017283320426941,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    337,
+                    230,
+                    1004,
+                    609
+                ],
+                "confidence": 0.3969910442829132,
+                "class_id": 30.0,
+                "class_name": "skis"
+            },
+            {
+                "bbox": [
+                    7,
+                    3,
+                    1058,
+                    1021
+                ],
+                "confidence": 0.29623058438301086,
+                "class_id": 59.0,
+                "class_name": "bed"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    756,
+                    424,
+                    1218,
+                    802
+                ],
+                "confidence": 0.6839525699615479,
+                "class_id": 3,
+                "class_name": "Chains"
+            },
+            {
+                "bbox": [
+                    594,
+                    733,
+                    1316,
+                    1184
+                ],
+                "confidence": 0.39197155833244324,
+                "class_id": 3,
+                "class_name": "Chains"
+            },
+            {
+                "bbox": [
+                    472,
+                    879,
+                    553,
+                    1039
+                ],
+                "confidence": 0.19697502255439758,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ],
+        "image_properties": {
+            "file_size_kb": 193.4912109375,
+            "codec": "JPEG",
+            "color_mode": "RGB",
+            "dimensions": "1080x1039",
+            "aspect_ratio": 1.039461020211742,
+            "megapixels": 1.12212,
+            "creation_date": "Non disponibile"
+        },
+        "state": "not_safe"
+    },
+    {
+        "file_name": "IMG_6.jpg",
+        "caption": "A person is holding flowers in front of them, against a softly lit backdrop, creating an artistic and intimate atmosphere.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    92,
+                    614,
+                    1080,
+                    1242
+                ],
+                "confidence": 0.3793788552284241,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    18,
+                    1,
+                    1080,
+                    1240
+                ],
+                "confidence": 0.2957558333873749,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    0,
+                    0,
+                    1055,
+                    1241
+                ],
+                "confidence": 0.2775634229183197,
+                "class_id": 58.0,
+                "class_name": "potted plant"
+            }
+        ],
+        "roboflow_detections": [],
+        "image_properties": {
+            "file_size_kb": 156.814453125,
+            "codec": "JPEG",
+            "color_mode": "RGB",
+            "dimensions": "1080x1244",
+            "aspect_ratio": 0.8681672025723473,
+            "megapixels": 1.34352,
+            "creation_date": "Non disponibile"
+        },
+        "state": "safe"
+    },
+    {
+        "file_name": "IMG_7.jpg",
+        "caption": "A person with a joyful expression stands on a beach, squinting in the sunlight. Behind them are hills, scattered clouds above, and other beachgoers, setting a relaxed beachside scene.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    347,
+                    567,
+                    650,
+                    1349
+                ],
+                "confidence": 0.9428409934043884,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    174,
+                    1137,
+                    261,
+                    1350
+                ],
+                "confidence": 0.8877716064453125,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    20,
+                    1159,
+                    51,
+                    1189
+                ],
+                "confidence": 0.7202535271644592,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    829,
+                    987,
+                    865,
+                    1020
+                ],
+                "confidence": 0.5772524476051331,
+                "class_id": 8.0,
+                "class_name": "boat"
+            },
+            {
+                "bbox": [
+                    899,
+                    1078,
+                    1027,
+                    1143
+                ],
+                "confidence": 0.4149368107318878,
+                "class_id": 8.0,
+                "class_name": "boat"
+            },
+            {
+                "bbox": [
+                    936,
+                    1076,
+                    974,
+                    1126
+                ],
+                "confidence": 0.3791585862636566,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    903,
+                    1109,
+                    1027,
+                    1144
+                ],
+                "confidence": 0.32307612895965576,
+                "class_id": 8.0,
+                "class_name": "boat"
+            }
+        ],
+        "roboflow_detections": [],
+        "image_properties": {
+            "file_size_kb": 137.302734375,
+            "codec": "JPEG",
+            "color_mode": "RGB",
+            "dimensions": "1080x1350",
+            "aspect_ratio": 0.8,
+            "megapixels": 1.458,
+            "creation_date": "Non disponibile"
+        },
+        "state": "safe"
+    },
+    {
+        "file_name": "IMG_8.jpg",
+        "caption": "A seated figure with obscured features, likely in introspection, against a neutral backdrop. It's a painting, characterized by thick, expressive brushwork and a limited color palette.",
+        "yolo_detections": [],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    403,
+                    775,
+                    635,
+                    1148
+                ],
+                "confidence": 0.14443394541740417,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ],
+        "image_properties": {
+            "file_size_kb": 232.9951171875,
+            "codec": "JPEG",
+            "color_mode": "RGB",
+            "dimensions": "1080x1018",
+            "aspect_ratio": 1.0609037328094302,
+            "megapixels": 1.09944,
+            "creation_date": "Non disponibile"
+        },
+        "state": "safe"
+    },
+    {
+        "file_name": "IMG_9.jpg",
+        "caption": "Two individuals engage in a close interaction against an ornate wall. One wears a textured, feathered garment, while the other person has their face obscured in red. The mood appears intimate or conceptual, suggesting an artistic or fashion-oriented setting.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    1,
+                    332,
+                    590,
+                    1347
+                ],
+                "confidence": 0.6272687315940857,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    66,
+                    0,
+                    1065,
+                    1345
+                ],
+                "confidence": 0.6055606007575989,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    304,
+                    213,
+                    1077,
+                    1347
+                ],
+                "confidence": 0.3214978575706482,
+                "class_id": 0.0,
+                "class_name": "person"
+            }
+        ],
+        "roboflow_detections": [],
+        "image_properties": {
+            "file_size_kb": 172.9833984375,
+            "codec": "JPEG",
+            "color_mode": "RGB",
+            "dimensions": "1080x1350",
+            "aspect_ratio": 0.8,
+            "megapixels": 1.458,
+            "creation_date": "Non disponibile"
+        },
+        "state": "safe"
+    },
+    {
+        "file_name": "IMG_10.jpg",
+        "caption": "A person in a black swimsuit poses on a green velvet chair in a home setting, looking directly at the camera.",
+        "yolo_detections": [
+            {
+                "bbox": [
+                    2,
+                    0,
+                    955,
+                    1346
+                ],
+                "confidence": 0.9576187133789062,
+                "class_id": 0.0,
+                "class_name": "person"
+            },
+            {
+                "bbox": [
+                    80,
+                    568,
+                    850,
+                    1347
+                ],
+                "confidence": 0.6969365477561951,
+                "class_id": 56.0,
+                "class_name": "chair"
+            },
+            {
+                "bbox": [
+                    171,
+                    0,
+                    338,
+                    161
+                ],
+                "confidence": 0.2948378026485443,
+                "class_id": 16.0,
+                "class_name": "dog"
+            },
+            {
+                "bbox": [
+                    41,
+                    28,
+                    861,
+                    1347
+                ],
+                "confidence": 0.26544249057769775,
+                "class_id": 56.0,
+                "class_name": "chair"
+            }
+        ],
+        "roboflow_detections": [
+            {
+                "bbox": [
+                    772,
+                    435,
+                    881,
+                    725
+                ],
+                "confidence": 0.10501156747341156,
+                "class_id": 13,
+                "class_name": "Tattoo"
+            }
+        ],
+        "image_properties": {
+            "file_size_kb": 116.6923828125,
+            "codec": "JPEG",
+            "color_mode": "RGB",
+            "dimensions": "1080x1348",
+            "aspect_ratio": 0.8011869436201781,
+            "megapixels": 1.45584,
+            "creation_date": "Non disponibile"
+        },
+        "state": "safe"
+    }
+]
