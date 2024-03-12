@@ -322,11 +322,16 @@ function createBoundingBox(container, det, detectionType) {
     1
   )}%)`;
   textDiv.style.position = "absolute";
-  textDiv.style.left = "-3px";
-  textDiv.style.top = "-26px";
-  textDiv.style.padding = "2px 5px";
+  textDiv.style.padding = "0px 0px";
   textDiv.style.fontSize = "18px";
   textDiv.style.color = "Black";
+
+  // Allinea il testo in alto se la posizione del bounding box è superiore a top 20px
+  if (det.bbox[1] > 20) {
+    textDiv.style.top = "-26px";
+  } else {
+    textDiv.style.top = "0";
+  }
 
   // Scegli il colore dello sfondo basato sul tipo di detection
   let backgroundColor;
@@ -347,62 +352,73 @@ function createBoundingBox(container, det, detectionType) {
 
   // Aggiungi il div del testo alla bounding box
   bboxDiv.appendChild(textDiv);
-
   container.appendChild(bboxDiv);
 }
 ///////////////// QUARTA SCENA ////////////////
+const feedbackElement = document.getElementById("feedback");
 function showCaptionAndButtons() {
   removeBoundingBoxes();
   console.log("Tutti i bounding box sono stati rimossi.");
 
-  const caption = jsonData[currentImageIndex].caption;
-  const feedbackElement = document.getElementById("feedback");
   feedbackElement.innerHTML = ""; // Pulisce il contenuto precedente
 
-  const captionElement = document.createElement("p");
-  captionElement.innerHTML = "<mark>" + "Caption:<br>" + "</mark>";
-  feedbackElement.appendChild(captionElement);
+  // Aggiunge "Caption:" come parte statica
+  const captionIntro = document.createElement("p");
+  captionIntro.innerHTML = "<mark>Caption:</mark><br>";
+  feedbackElement.appendChild(captionIntro);
 
-  function typeWriter(text, index, callback) {
-    if (index < text.length) {
-      captionElement.innerHTML += "<mark>" + text.charAt(index) + "</mark>";
-      index++;
-      setTimeout(function () {
-        typeWriter(text, index, callback);
-      }, 20); // Regola questo valore per aumentare o diminuire la velocità di digitazione
-    } else if (callback) {
-      callback(); // Chiama la funzione callback dopo aver finito di scrivere la caption
+  // Elemento per la caption animata
+  const animatedCaption = document.createElement("p");
+  feedbackElement.appendChild(animatedCaption);
+
+  // Estrae il testo della caption
+  const captionText =
+    jsonData[currentImageIndex].caption + "<br><mark>State:</mark>";
+  let index = 0;
+
+  function animateCaption(timestamp) {
+    const speed = 10; // Velocità di digitazione in millisecondi
+    if (!animateCaption.last || timestamp - animateCaption.last >= speed) {
+      if (index <= captionText.length) {
+        animatedCaption.innerHTML =
+          "<mark>" + captionText.slice(0, index++) + "</mark>";
+        animateCaption.last = timestamp;
+      } else {
+        adjustButtonPositions(); // Adegua la posizione dei bottoni al termine dell'animazione
+        return; // Termina l'animazione
+      }
     }
+    requestAnimationFrame(animateCaption);
   }
 
-  // Avvia l'animazione della caption e poi aggiusta la posizione dei bottoni
-  typeWriter(caption, 0, function () {
-    captionElement.innerHTML += "<mark>" + "<br>State:" + "<mark>"; // Aggiunge "Stato:" alla fine della caption
-    adjustButtonPositions(); // Aggiusta la posizione dei bottoni come prima
-  });
-  function adjustButtonPositions() {
-    // Aggiusta la posizione dei bottoni basandoti sull'altezza della caption
-    const safeButton = document.getElementById("safe_but");
-    const notSafeButton = document.getElementById("not_safe_but");
-
-    safeButton.removeEventListener("click", handleButtonClick);
-    notSafeButton.removeEventListener("click", handleButtonClick);
-    safeButton.addEventListener("click", handleButtonClick);
-    notSafeButton.addEventListener("click", handleButtonClick);
-    safeButton.style.display = "block";
-    notSafeButton.style.display = "block";
-  }
-
-  function handleButtonClick() {
-    feedbackElement.innerHTML = "";
-    switchState("STATE_SHOW_IMAGES");
-    showFeedback();
-    const safeButton = document.getElementById("safe_but");
-    const notSafeButton = document.getElementById("not_safe_but");
-    safeButton.style.display = "none";
-    notSafeButton.style.display = "none";
-  }
+  requestAnimationFrame(animateCaption); // Avvia l'animazione
 }
+
+function adjustButtonPositions() {
+  // Gestione intelligente dei bottoni, assicurandosi di non duplicare gli event listener
+  const buttons = ["safe_but", "not_safe_but"];
+  buttons.forEach((id) => {
+    const button = document.getElementById(id);
+    if (!button.getAttribute("data-listener")) {
+      button.addEventListener("click", handleButtonClick);
+      button.setAttribute("data-listener", "true");
+    }
+    button.style.display = "block";
+  });
+}
+
+function handleButtonClick() {
+  feedbackElement.innerHTML = "";
+  switchState("STATE_SHOW_IMAGES");
+  showFeedback();
+  const safeButton = document.getElementById("safe_but");
+  const notSafeButton = document.getElementById("not_safe_but");
+  safeButton.style.display = "none";
+  notSafeButton.style.display = "none";
+}
+const imgageBackground = document.getElementById("img");
+const overlay = document.getElementById("overlay"); // Ottiene l'overlay
+
 ///////////////// NUOVA SCENA XDLOL - QUINTA SCENA////////////////
 function showFeedback() {
   // updateSupabase("current_state", 4);
@@ -418,6 +434,12 @@ function showFeedback() {
   imageElement.src =
     imageState === "safe" ? "assets/safe.png" : "assets/not_safe.png";
   imageEyeDiv.appendChild(imageElement);
+  if (imageState === "not_safe") {
+    imgageBackground.style.filter = "blur(10px)";
+  }
+
+  // Mostra l'overlay
+  overlay.style.display = "block";
 
   // Mostra il div e centra l'immagine
   imageDiv.style.display = "block";
@@ -434,6 +456,8 @@ function showFeedback() {
 }
 
 function shuffleImages() {
+  imgageBackground.style.filter = "blur(0px)";
+  overlay.style.display = "none";
   updateSupabase("current_state", 5);
   console.log("current_state: ", "stateShuffling");
   console.log("Shuffling images...");
