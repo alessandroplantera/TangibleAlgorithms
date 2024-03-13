@@ -82,8 +82,8 @@
   }
 
 #safe_but, #not_safe_but {
-  padding: 40px; /* Aggiunge uno spazio cliccabile intorno al bottone */
-  margin: -40px; /* Opzionale: compensa l'aumento di dimensione per mantenere la posizione */
+  padding: 300px; /* Aggiunge uno spazio cliccabile intorno al bottone */
+  margin: -300px; /* Opzionale: compensa l'aumento di dimensione per mantenere la posizione */
   }
 
   #safe_but{
